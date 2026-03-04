@@ -280,21 +280,22 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage contacts faster than a typical mouse/GUI driven app, tutors can efficiently manage profile of contacts.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                                 | So that I can…​                                                             |
+|----------|--------------------------------------------|----------------------------------------------|-----------------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions                       | refer to instructions when I forget how to use the App                      |
+| `* * *`  | new user                                   | see an initial help message                  | see how to get started with the App                                         |
+| `* * *`  | user                                       | delete a contact                             | remove contacts that I no longer need                                       |
+| `* * *`  | user                                       | find a contact by name                       | locate details of contact without having to go through the entire list      |
+| `* * *`  | user                                       | find other relevant contacts given a contact | see others who are related to my contact if there is a need to contact them |
+| `* *`    | user                                       | be able to tag contacts                      | view information relevant to this contact                                   |
+| `*`      | user with many persons in the contact book | sort persons by name                         | locate a contact easily                                                     |
 
 *{More to be added}*
 
