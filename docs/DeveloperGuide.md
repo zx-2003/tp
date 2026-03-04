@@ -301,18 +301,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TutorMap` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+(For all use cases below, the user has launched the application and is on the main screen)
+
+**Use case: UC1 - Listing all persons**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+2.  TutorMap shows a list of persons
 
 **Extensions**
 
@@ -320,13 +318,85 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: UC2 - Delete a person**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
+
+1.  User performs Listing all Persons (UC1) or Finding a person (UC5)
+2.  User requests to delete a specific person in the list
+3.  TutorMap deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 2a. The given index is invalid.
+
+    * 2a1. TutorMap shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: UC3 - Add a person**
+
+**MSS**
+
+1.  User performs Listing all Persons (UC01) or Finding a person (UC5)
+2.  User requests to add a person to the list
+3.  TutorMap adds the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user entered invalid parameters while adding
+
+    * 2a1: TutorMap shows an error message.
+    
+      Use case resumes at step 2.
+
+**Use case: UC4 - Edit a person**
+
+**MSS**
+
+1.  User performs Listing all Persons (UC01) or Finding a person (UC5)
+2.  User requests to edit a person on the list
+3.  TutorMap adds the person
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 2a. The user entered invalid parameters/index while editing
+
+    * 2a1: TutorMap shows an error message.
+    
+      Use case resumes at step 2.
+
+**Use case: UC5 - Finding a person**
+
+**MSS**
+
+1.  User attempts to find the person
+2.  TutorMap displays people found and the result count
+
+     Use case ends.
+
+**Extensions**
+
+* 1a. There is no match.
+
+     * 1a1: TutorMap only shows the result count
+
+         Use case ends.
+
 
 ### Non-Functional Requirements
 
