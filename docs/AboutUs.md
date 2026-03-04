@@ -58,6 +58,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
+### keiran0
+
+<img src="images/keiran0.png" width="200px">
+
+[[github](http://github.com/keiran0)]
+
+* Role: Student
+* Responsibilities: Pass cs2103t
 ### Brendan Chong
 
 <img src="images/brendaan07.png" width="200px">
