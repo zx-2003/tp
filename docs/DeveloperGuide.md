@@ -400,7 +400,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should run on any mainstream OS that supports Java (Windows/macOS/Linux) without requiring OS-specific setup beyond Java.
+1.  Should run on any mainstream OS that supports Java without requiring OS-specific setup beyond Java.
 2.  All user data should be stored locally on the user’s device.
 3.  Should support an effectively unbounded number of contacts, limited only by the user’s local storage capacity.
 4.  Should detect likely duplicate entries and warn the user before saving, to reduce accidental data errors.
