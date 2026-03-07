@@ -29,7 +29,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Linq Herng
 
-<img src="images/linqwithq.jpg" width="200px">
+<img src="images/linqwithq.png" width="200px">
 
 [[github](http://github.com/LinqWithQ)]
 
