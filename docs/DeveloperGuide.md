@@ -278,7 +278,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Prefer desktop applications over mobile or web applications
 * Prefer keyboard/CLI interactions rather than heavy mouse usage
 
-**Value proposition**: TutorMap helps private tutors manage tutoring contacts faster than typical GUI-based contact managers 
+**Value proposition**: TutorMap helps private tutors manage tutoring contacts faster than typical GUI-based contact managers
 by combining a visual interface with efficient CLI commands for quick data entry, tagging, and relationship tracking.
 
 
@@ -354,7 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The user entered invalid parameters while adding
 
     * 2a1: TutorMap shows an error message.
-    
+
       Use case resumes at step 2.
 
 **Use case: UC4 - Edit a person**
@@ -376,7 +376,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The user entered invalid parameters/index while editing
 
     * 2a1: TutorMap shows an error message.
-    
+
       Use case resumes at step 2.
 
 **Use case: UC5 - Finding a person**
@@ -404,7 +404,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  Should support an effectively unbounded number of contacts, limited only by the user’s local storage capacity.
 4.  Should not impose a hard limit on the number of tags per contact.
 5.  Saving updates should be efficient and avoid unnecessary full-file rewrites for small changes.
- 
+
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
