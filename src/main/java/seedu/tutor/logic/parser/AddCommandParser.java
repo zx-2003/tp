@@ -1,11 +1,7 @@
 package seedu.tutor.logic.parser;
 
 import static seedu.tutor.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.tutor.logic.parser.CliSyntax.*;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -17,6 +13,7 @@ import seedu.tutor.model.person.Email;
 import seedu.tutor.model.person.Name;
 import seedu.tutor.model.person.Person;
 import seedu.tutor.model.person.Phone;
+import seedu.tutor.model.relation.Relation;
 import seedu.tutor.model.tag.Tag;
 
 /**
@@ -44,8 +41,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Relation> relationList = ParserUtil.parseRelations(argMultimap.getAllValues(PREFIX_RELATION));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Person person = new Person(name, phone, email, address, tagList, relationList);
 
         return new AddCommand(person);
     }

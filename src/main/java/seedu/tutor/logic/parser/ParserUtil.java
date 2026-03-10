@@ -13,6 +13,7 @@ import seedu.tutor.model.person.Address;
 import seedu.tutor.model.person.Email;
 import seedu.tutor.model.person.Name;
 import seedu.tutor.model.person.Phone;
+import seedu.tutor.model.relation.Relation;
 import seedu.tutor.model.tag.Tag;
 
 /**
@@ -121,4 +122,32 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String relations} into a {@code Relation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code relation} is invalid.
+     */
+    public static Relation parseRelation(String relation) throws ParseException {
+        requireNonNull(relation);
+        String trimmedRelation = relation.trim();
+        if (!Relation.isValidRelationName(trimmedRelation)) {
+            throw new ParseException(Relation.MESSAGE_CONSTRAINTS);
+        }
+        return new Relation(trimmedRelation);
+    }
+
+    /**
+     * Parses {@code Collection<String> relations} into a {@code Set<Relation>}.
+     */
+    public static Set<Relation> parseRelations(Collection<String> relations) throws ParseException {
+        requireNonNull(relations);
+        final Set<Relation> relationSet = new HashSet<>();
+        for (String relationName : relations) {
+            relationSet.add(parseRelation(relationName));
+        }
+        return relationSet;
+    }
+
 }

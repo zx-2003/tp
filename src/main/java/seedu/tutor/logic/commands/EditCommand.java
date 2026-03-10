@@ -26,6 +26,7 @@ import seedu.tutor.model.person.Email;
 import seedu.tutor.model.person.Name;
 import seedu.tutor.model.person.Person;
 import seedu.tutor.model.person.Phone;
+import seedu.tutor.model.relation.Relation;
 import seedu.tutor.model.tag.Tag;
 
 /**
@@ -100,8 +101,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Relation> updatedRelations = editPersonDescriptor.getRelations().orElse(personToEdit.getRelations());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedRelations);
     }
 
     @Override
@@ -138,6 +140,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Set<Relation> relations;
 
         public EditPersonDescriptor() {}
 
@@ -208,6 +211,25 @@ public class EditCommand extends Command {
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
+
+        /**
+         * Sets {@code relations} to this object's {@code relations}.
+         * A defensive copy of {@code relations} is used internally.
+         */
+        public void setRelations(Set<Relation> relations) {
+            this.relations = (relations != null) ? new HashSet<>(relations) : null;
+        }
+
+        /**
+         * Returns an unmodifiable relations set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code relations} is null.
+         */
+        public Optional<Set<Relation>> getRelations() {
+            return (relations != null) ? Optional.of(Collections.unmodifiableSet(relations)) : Optional.empty();
+        }
+
+
 
         @Override
         public boolean equals(Object other) {
