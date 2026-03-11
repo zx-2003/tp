@@ -1,8 +1,12 @@
 package seedu.tutor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.tutor.logic.parser.CliSyntax.*;
-
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.tutor.commons.util.ToStringBuilder;
 import seedu.tutor.logic.Messages;

@@ -111,6 +111,12 @@ public class ParserUtil {
         return new Tag(trimmedTag);
     }
 
+    /**
+     * Parses a {@code String tag} into a {@code Subject}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Subject} is invalid.
+     */
     public static String parseSubject(String subject) throws ParseException {
         requireNonNull(subject);
         String trimmedSubject = subject.trim();
