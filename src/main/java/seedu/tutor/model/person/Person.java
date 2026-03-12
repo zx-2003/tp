@@ -35,14 +35,6 @@ public class Person {
         this(name, phone, email, address, tags, relations, "");
     }
 
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, tags, new HashSet<>(), "");
-    }
-
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, String subject) {
-        this(name, phone, email, address, tags, new HashSet<>(), subject);
-    }
-
     /**
      * Complete constructor for person, other constructors kept for dependency to be removed over time
      */
