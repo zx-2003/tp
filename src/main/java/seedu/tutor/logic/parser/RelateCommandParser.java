@@ -13,7 +13,6 @@ import static seedu.tutor.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Map;
 
-import seedu.tutor.commons.core.index.Index;
 import seedu.tutor.logic.commands.RelateCommand;
 import seedu.tutor.logic.parser.exceptions.ParseException;
 import seedu.tutor.model.relation.Relation;
@@ -39,14 +38,7 @@ public class RelateCommandParser implements Parser<RelateCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_RELATE_ADD, PREFIX_RELATE_DELETE);
 
-        Index index;
         Relation relation;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RelateCommand.MESSAGE_USAGE), pe);
-        }
 
         // errors
         if (argMultimap.getValue(PREFIX_NAME).isPresent()
@@ -63,10 +55,10 @@ public class RelateCommandParser implements Parser<RelateCommand> {
         // can expand to add and/or delete of multiple relation per command
         if (argMultimap.getValue(PREFIX_RELATE_ADD).isPresent()) {
             relation = ParserUtil.parseRelation(argMultimap.getValue(PREFIX_RELATE_ADD).get());
-            return RelateCommand.create(index, relateCommandTypeMap.get(PREFIX_RELATE_ADD), relation);
+            return new RelateCommand(relation, relateCommandTypeMap.get(PREFIX_RELATE_ADD));
         } else if (argMultimap.getValue(PREFIX_RELATE_DELETE).isPresent()) {
             relation = ParserUtil.parseRelation(argMultimap.getValue(PREFIX_RELATE_DELETE).get());
-            return RelateCommand.create(index, relateCommandTypeMap.get(PREFIX_RELATE_DELETE), relation);
+            return new RelateCommand(relation, relateCommandTypeMap.get(PREFIX_RELATE_DELETE));
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RelateCommand.MESSAGE_USAGE));

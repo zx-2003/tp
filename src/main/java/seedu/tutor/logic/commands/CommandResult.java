@@ -36,6 +36,17 @@ public class CommandResult {
         this(feedbackToUser, false, false);
     }
 
+    /**
+     * Merge the result of 2 CommandResult into 1.
+     * @param result1 The first CommandResult object.
+     * @param result2 The second CommandResult object.
+     * @return New CommandResult object with merged feedback, showHelp and exit are false.
+     */
+    public static CommandResult merge(CommandResult result1, CommandResult result2) {
+        String newFeedback = result1.getFeedbackToUser() + "\n" + result2.getFeedbackToUser();
+        return new CommandResult(newFeedback);
+    }
+
     public String getFeedbackToUser() {
         return feedbackToUser;
     }

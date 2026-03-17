@@ -28,6 +28,7 @@ public class RelateAddCommand extends RelateCommand {
      * to the command factory in {@link RelateCommand}.
      */
     RelateAddCommand(Index index, Relation relationToAdd) {
+        super(relationToAdd, RelateCommandType.ADD);
         requireNonNull(index);
         requireNonNull(relationToAdd);
 
@@ -38,13 +39,13 @@ public class RelateAddCommand extends RelateCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> persons = model.getTutorMap().getPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= persons.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToAddRelation = lastShownList.get(index.getZeroBased());
+        Person personToAddRelation = persons.get(index.getZeroBased());
         Person addedRelationPerson = createAddRelationPerson(personToAddRelation, relationToAdd);
         model.setPerson(personToAddRelation, addedRelationPerson);
         return new CommandResult(String.format(MESSAGE_RELATE_SUCCESS, Messages.format(addedRelationPerson)));

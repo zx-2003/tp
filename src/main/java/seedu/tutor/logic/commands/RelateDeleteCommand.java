@@ -30,6 +30,7 @@ public class RelateDeleteCommand extends RelateCommand {
      * to the command factory in {@link RelateCommand}.
      */
     RelateDeleteCommand(Index index, Relation relationToDelete) {
+        super(relationToDelete, RelateCommandType.DELETE);
         requireNonNull(index);
         requireNonNull(relationToDelete);
 
@@ -40,21 +41,30 @@ public class RelateDeleteCommand extends RelateCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> persons = model.getTutorMap().getPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= persons.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDeleteRelation = lastShownList.get(index.getZeroBased());
+        Person personToDeleteRelation = persons.get(index.getZeroBased());
 
         // Validate existence of Relation in Person
         Set<Relation> originalRelations = personToDeleteRelation.getRelations();
-        if (!originalRelations.contains(relationToDelete)) {
+
+        Relation relationSearched = null;
+        for (Relation relation: originalRelations) {
+            if (relation.equals(relationToDelete)) {
+                relationSearched = relation;
+                break;
+            }
+        }
+
+        if (relationSearched == null) {
             throw new CommandException(MESSAGE_INVALID_RELATION_TO_DELETE);
         }
 
-        Person addedRelationPerson = createDeleteRelationPerson(personToDeleteRelation, relationToDelete);
+        Person addedRelationPerson = createDeleteRelationPerson(personToDeleteRelation, relationSearched);
         model.setPerson(personToDeleteRelation, addedRelationPerson);
         return new CommandResult(String.format(MESSAGE_RELATE_SUCCESS, Messages.format(addedRelationPerson)));
     }

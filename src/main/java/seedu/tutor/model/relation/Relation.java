@@ -13,6 +13,7 @@ public class Relation {
     public static final String VALIDATION_REGEX = "([^/]+)/([^/]+)/([^/]+)/([^/]+)";
 
     public final String relationName;
+    public final String reverseRelationName;
 
     /**
      * Constructs a {@code Relation}.
@@ -23,6 +24,18 @@ public class Relation {
         requireNonNull(relationName);
         checkArgument(isValidRelationName(relationName), MESSAGE_CONSTRAINTS);
         this.relationName = relationName;
+        this.reverseRelationName = reverseRelation(relationName);
+    }
+
+    private String reverseRelation(String relationName) {
+        String[] args = relationName.split("/");
+        String temp = args[0];
+        args[0] = args[1];
+        args[1] = temp;
+        temp = args[2];
+        args[2] = args[3];
+        args[3] = temp;
+        return String.join("/", args);
     }
 
     /**
@@ -43,7 +56,8 @@ public class Relation {
         }
 
         Relation otherRelation = (Relation) other;
-        return relationName.equals(otherRelation.relationName);
+        return relationName.equals(otherRelation.relationName)
+                || reverseRelationName.equals(otherRelation.relationName);
     }
 
     @Override
