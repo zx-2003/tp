@@ -14,7 +14,8 @@ import seedu.tutor.model.relation.Relation;
 
 
 /**
- * Creates subtype of RelateCommand.
+ * Add or delete a relation between two person in the list.
+ * Bidirectional, Relation object is added or deleted on both Person object.
  */
 public class RelateCommand extends Command {
 
@@ -27,17 +28,16 @@ public class RelateCommand extends Command {
 
     public static final String COMMAND_WORD = "relate";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the relations of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add or delete a relation between two person.\n"
+            + "Parameters: "
             + "[" + PREFIX_RELATE_ADD + "RELATION] "
             + "or "
-            + "[" + PREFIX_RELATE_DELETE + "RELATION]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "[" + PREFIX_RELATE_DELETE + "RELATION]\n"
+            + "RELATION format: [Person1/Person2/Relation Name1/Relation Name2]\n"
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_RELATE_ADD + "Linq/Keiran/teammate/teammate ";
 
-    public static final String MESSAGE_RELATE_SUCCESS = "Updated relation(s) to Person: %1$s";
+    public static final String MESSAGE_RELATE_SUCCESS = "Updated relation to Person: %1$s";
 
     private final RelateCommandType type;
     private final Relation relation;
@@ -53,7 +53,7 @@ public class RelateCommand extends Command {
         requireNonNull(relation);
         this.type = type;
         this.relation = relation;
-        String[] args = relation.relationName.split("/+");
+        String[] args = relation.relationName.split("/");
         this.name1 = args[0];
         this.name2 = args[1];
     }
@@ -136,6 +136,5 @@ public class RelateCommand extends Command {
         CommandResult result2 = command2.execute(model);
 
         return CommandResult.merge(result1, result2);
-
     }
 }
