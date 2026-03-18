@@ -43,7 +43,8 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress());
+                .append(person.getAddress())
+                .append("; Subject: ");
         if (!person.getSubject().isBlank()) {
             builder.append(person.getSubject());
             builder.append("; ");
