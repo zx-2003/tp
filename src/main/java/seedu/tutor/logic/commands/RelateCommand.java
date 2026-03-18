@@ -6,6 +6,7 @@ import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_DELETE;
 
 import javafx.collections.ObservableList;
 import seedu.tutor.commons.core.index.Index;
+import seedu.tutor.logic.Messages;
 import seedu.tutor.logic.commands.exceptions.CommandException;
 import seedu.tutor.model.Model;
 import seedu.tutor.model.person.Person;
@@ -118,16 +119,21 @@ public class RelateCommand extends Command {
         Index index1 = getIndex(this.name1, model);
         Index index2 = getIndex(this.name2, model);
 
-        requireNonNull(index1);
-        requireNonNull(index2);
-        RelateCommand command1 = create(index1, this.type, this.relation);
-        RelateCommand command2 = create(index2, this.type, this.relation);
+        try {
+            requireNonNull(index1);
+            requireNonNull(index2);
+            RelateCommand command1 = create(index1, this.type, this.relation);
+            RelateCommand command2 = create(index2, this.type, this.relation);
 
-        requireNonNull(command1);
-        requireNonNull(command2);
-        CommandResult result1 = command1.execute(model);
-        CommandResult result2 = command2.execute(model);
+            requireNonNull(command1);
+            requireNonNull(command2);
+            CommandResult result1 = command1.execute(model);
+            CommandResult result2 = command2.execute(model);
 
-        return CommandResult.merge(result1, result2);
+            return CommandResult.merge(result1, result2);
+        } catch (NullPointerException e) {
+            throw new CommandException(Messages.PERSONS_DOES_NOT_EXIST);
+        }
+
     }
 }
