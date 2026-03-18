@@ -52,19 +52,11 @@ public class RelateDeleteCommand extends RelateCommand {
         // Validate existence of Relation in Person
         Set<Relation> originalRelations = personToDeleteRelation.getRelations();
 
-        Relation relationSearched = null;
-        for (Relation relation: originalRelations) {
-            if (relation.equals(relationToDelete)) {
-                relationSearched = relation;
-                break;
-            }
-        }
-
-        if (relationSearched == null) {
+        if (!originalRelations.contains(relationToDelete)) {
             throw new CommandException(MESSAGE_INVALID_RELATION_TO_DELETE);
         }
 
-        Person addedRelationPerson = createDeleteRelationPerson(personToDeleteRelation, relationSearched);
+        Person addedRelationPerson = createDeleteRelationPerson(personToDeleteRelation, relationToDelete);
         model.setPerson(personToDeleteRelation, addedRelationPerson);
         return new CommandResult(String.format(MESSAGE_RELATE_SUCCESS, Messages.format(addedRelationPerson)));
     }
