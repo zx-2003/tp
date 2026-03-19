@@ -59,7 +59,7 @@ public class RelateCommandParser implements Parser<RelateCommand> {
     private boolean validCommand(String args) {
         args = args.trim();
         int len = args.length();
-        int accu = 0;   // counting of "/"
+        int accu = 0;
         char[] arr = args.toCharArray();
         int index = 2;
 
