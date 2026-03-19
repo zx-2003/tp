@@ -1,6 +1,7 @@
 package seedu.tutor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_DELETE;
 
 import java.util.HashSet;
 import java.util.List;
@@ -53,7 +54,8 @@ public class RelateDeleteCommand extends Command {
         Set<Relation> originalRelations = personToDeleteRelation.getRelations();
 
         if (!originalRelations.contains(relationToDelete)) {
-            throw new CommandException(MESSAGE_INVALID_RELATION_TO_DELETE);
+            throw new CommandException(MESSAGE_INVALID_RELATION_TO_DELETE
+                    + ", by " + PREFIX_RELATE_DELETE + this.relationToDelete.relationName);
         }
 
         Person addedRelationPerson = createDeleteRelationPerson(personToDeleteRelation, relationToDelete);

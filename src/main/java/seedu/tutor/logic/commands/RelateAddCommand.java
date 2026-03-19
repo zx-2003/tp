@@ -1,6 +1,7 @@
 package seedu.tutor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_ADD;
 
 import java.util.HashSet;
 import java.util.List;
@@ -48,7 +49,8 @@ public class RelateAddCommand extends Command {
         Person personToAddRelation = persons.get(index.getZeroBased());
 
         if (personToAddRelation.getRelations().contains(relationToAdd)) {
-            throw new CommandException(Messages.RELATIONS_ALREADY_EXIST);
+            throw new CommandException(Messages.RELATIONS_ALREADY_EXIST + ", by "
+                    + PREFIX_RELATE_ADD + this.relationToAdd.relationName);
         }
 
         Person addedRelationPerson = createAddRelationPerson(personToAddRelation, relationToAdd);
