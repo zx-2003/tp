@@ -67,8 +67,8 @@ public class PersonCard extends UiPart<Region> {
             subject.setText("Subject: " + person.getSubject());
         }
 
-        person.getRelations().stream()
-                .sorted(Comparator.comparing(relation -> relation.relationName))
-                .forEach(relation -> relations.getChildren().add(new Label(relation.relationName)));
+        person.formatRelationNames().stream()
+                .sorted(Comparator.comparing(String::toString))
+                .forEach(formattedRelation -> relations.getChildren().add(new Label(formattedRelation)));
     }
 }

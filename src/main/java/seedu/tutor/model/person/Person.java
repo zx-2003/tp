@@ -108,6 +108,31 @@ public class Person {
     }
 
     /**
+     * Returns a set of all relations formatted for display.
+     * For example, given current Person = Amy,
+     * Relation "Amy/Bob/teacher/student"  or "Bob/Amy/student/teacher"
+     * will be formatted as "Bob (student)"
+     */
+    public Set<String> formatRelationNames() {
+        Set<String> formattedRelationNames = new HashSet<>();
+        for (Relation relation : relations) {
+
+            // First person is self
+            String[] args = relation.relationName.split("/");
+            String otherPerson = args[1];
+            String otherPersonRelation = args[3];
+
+            if (Objects.equals(args[1], name.fullName)) { // Second person is self
+                otherPerson = args[0];
+                otherPersonRelation = args[2];
+            }
+
+            formattedRelationNames.add(String.format(otherPerson + " (" + otherPersonRelation + ")"));
+        }
+        return formattedRelationNames;
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
