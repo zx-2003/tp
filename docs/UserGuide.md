@@ -6,8 +6,7 @@ pageNav: 3
 
 # TutorMap User Guide
 
-TutorMap is a **desktop app for managing tutees, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). TutorMap helps you manage tutee details, including addresses, phone numbers, subjects taught, and family relationships (like siblings or parents), in one place. 
-It replaces messy Excel sheets so users can focus on teaching, not admin.
+TutorMap is a **desktop app for managing tutees, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). TutorMap helps you manage tutee details, including addresses, phone numbers, subjects taught, and family relationships (like siblings or parents), in one place. It replaces messy Excel sheets so users can focus on teaching, not admin.
 
 TutorMap is optimized for tutors, who likely have basic computer skills, use apps like WhatsApp for parent communication, and track tutees in spreadsheets or notes. It serves users who want a simple tool to stay organized without complex software.
 
