@@ -78,4 +78,20 @@ public class Relation {
         return '[' + relationName + ']';
     }
 
+    /**
+     * returns a new Relation object with updated person's name.
+     * @param oldPerson Person's name before update.
+     * @param newPerson Person's name after update.
+     */
+    public Relation changePerson(String oldPerson, String newPerson) {
+        String[] args = relationName.split("/");
+        if (args[0].equals(oldPerson)) {
+            args[0] = newPerson;
+        } else if (args[1].equals(oldPerson)) {
+            args[1] = newPerson;
+        }
+        String relation = String.join("/", args);
+        return new Relation(relation);
+    }
+
 }

@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.tutor.logic.parser.Prefix;
 import seedu.tutor.model.person.Person;
+import seedu.tutor.model.relation.Relation;
 
 /**
  * Container for user visible messages.
@@ -19,7 +20,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String PERSONS_DOES_NOT_EXIST = "The provided person name does not exist.";
-    public static final String RELATIONS_ALREADY_EXIST = "The relation already exists";
+    public static final String RELATIONS_ALREADY_EXIST = "The relation already exists.";
+    public static final String REPEATED_ARGUMENT = "Repeated argument(s) detected.";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -36,6 +38,12 @@ public class Messages {
      * Formats the {@code person} for display to the user.
      */
     public static String format(Person person) {
+
+        StringBuilder relations = new StringBuilder();
+        for (Relation relation: person.getRelations()) {
+            relations.append(relation.toString());
+        }
+
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; Phone: ")
@@ -43,8 +51,10 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress());
-        builder.append(" Subjects: ");
+                .append(person.getAddress())
+                .append("; Relations: ")
+                .append(relations)
+                .append("; Subject: ");
         person.getSubjects().forEach(builder::append);
         builder.append(" Tags: ");
         person.getTags().forEach(builder::append);

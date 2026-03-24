@@ -1,32 +1,17 @@
 ---
-layout: default.md
-title: "TutorMap User Guide"
-pageNav: 3
+  layout: default.md
+  title: "User Guide"
+  pageNav: 3
 ---
 
-# TutorMap User Guide
+# User Guide
 
 TutorMap is a **desktop app for managing tutees, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). TutorMap helps you manage tutee details, including addresses, phone numbers, subjects taught, and family relationships (like siblings or parents), in one place. It replaces messy Excel sheets so users can focus on teaching, not admin.
 
 TutorMap is optimized for tutors, who likely have basic computer skills, use apps like WhatsApp for parent communication, and track tutees in spreadsheets or notes. It serves users who want a simple tool to stay organized without complex software.
 
-
-## Table of Contents
-- [Quick start](#quick-start)
-- [Features](#features)
-    - [Viewing help](#viewing-help--help)
-    - [Adding a person](#adding-a-person-add)
-    - [Listing all persons](#listing-all-persons-list)
-    - [Editing a person](#editing-a-person-edit)
-    - [Locating persons by name](#locating-persons-by-name-find)
-    - [Adding or deleting a relation](#adding-or-deleting-a-relation-relate)
-    - [Deleting a person](#deleting-a-person-delete)
-    - [Clearing all entries](#clearing-all-entries-clear)
-    - [Exiting the program](#exiting-the-program-exit)
-    - [Saving the data](#saving-the-data)
-    - [Editing the data file](#editing-the-data-file)
-- [FAQ](#faq)
-- [Known issues](#known-issues)
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -46,15 +31,15 @@ TutorMap is optimized for tutors, who likely have basic computer skills, use app
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -72,8 +57,8 @@ TutorMap is optimized for tutors, who likely have basic computer skills, use app
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `...` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]...` can be used as `` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…`​ after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -82,32 +67,26 @@ TutorMap is optimized for tutors, who likely have basic computer skills, use app
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+  </box>
 
 ### Viewing help : `help`
 
 Provides a message to the user displaying the list of different commands.
 
-![help message](images/helpCommand.png)
-
 Format: `help`
+
+![help message](images/helpCommand.png)
 
 
 ### Adding a person: `add`
 
 Adds a person to TutorMap.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SUBJECT] [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SUBJECT] [t/TAG]…​`
 
-<box type="tip" seamless>
-
-**Tip:** A person can have any number of tags (including 0)
-</box>
-
-<box type="tip" seamless>
-
-**Tip:** A person may have a subject (not required)
-</box>
+Notes: 
+* A person can have any number of tags (including 0)
+* A person can have any number of subjects (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -124,20 +103,21 @@ Format: `list`
 
 Edits an existing person in TutorMap.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [s/SUBJECT]...`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [s/SUBJECT]…​`
 
+Notes: 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, ...
-* At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing subjects, the existing subject of the person will be removed i.e adding of subject is not cumulative.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * You can remove the person's subject by typing `s/` without specifying any subject after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-*  `edit 3 s/` Clears existing subject for the 3rd person. 
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 3 s/` Clears existing subject for the 3rd person. 
+* `edit 3 s/Math` Edits the subject of the 3rd person to be `Math`.
 
 ### Locating persons by name: `find`
 
@@ -182,7 +162,7 @@ Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, ...
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the tutor map.
@@ -235,10 +215,10 @@ Furthermore, certain edits can cause the TutorMap to behave in unexpected ways (
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [s/SUBJECT]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [s/SUBJECT]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [s/SUBJECT]...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [s/SUBJECT]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`

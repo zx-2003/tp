@@ -4,18 +4,24 @@ import static java.util.Objects.requireNonNull;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_ADD;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_DELETE;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javafx.collections.ObservableList;
 import seedu.tutor.commons.core.index.Index;
 import seedu.tutor.logic.Messages;
 import seedu.tutor.logic.commands.exceptions.CommandException;
+import seedu.tutor.logic.parser.Prefix;
 import seedu.tutor.model.Model;
 import seedu.tutor.model.person.Person;
 import seedu.tutor.model.relation.Relation;
 
-
 /**
- * Add or delete a relation between two person in the list.
+ * Add and/or delete multiple relation between two person in the list.
  * Bidirectional, Relation object is added or deleted on both Person object.
+ * Relations are added first, then delete.
  */
 public class RelateCommand extends Command {
 
@@ -37,25 +43,19 @@ public class RelateCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_RELATE_ADD + "Linq/Keiran/teammate/teammate ";
 
-    public static final String MESSAGE_RELATE_SUCCESS = "Updated relation to Person: %1$s";
-
-    private final RelateCommandType type;
-    private final Relation relation;
-    private final String name1;
-    private final String name2;
+    private final Set<Relation> relationsToAdd;
+    private final Set<Relation> relationsToDelete;
 
     /**
-     * Return a Command object that executes two sub-RelateCommand.
-     * @param relation The relation object that represent the relation between two contact.
-     * @param type The type of RelateCommand.
+     * Return a command that add and/or delete multiple relation.
+     * @param relationsToAdd A set of relation to be added.
+     * @param relationsToDelete A set of relation to be deleted.
      */
-    public RelateCommand(Relation relation, RelateCommandType type) {
-        requireNonNull(relation);
-        this.type = type;
-        this.relation = relation;
-        String[] args = relation.relationName.split("/");
-        this.name1 = args[0];
-        this.name2 = args[1];
+    public RelateCommand(Set<Relation> relationsToAdd, Set<Relation> relationsToDelete) {
+        requireNonNull(relationsToAdd);
+        requireNonNull(relationsToDelete);
+        this.relationsToAdd = relationsToAdd;
+        this.relationsToDelete = relationsToDelete;
     }
 
     /**
@@ -64,7 +64,7 @@ public class RelateCommand extends Command {
      * @param relation The relation object that represent the relation between two contact.
      * @return Subtype of RelateCommand.
      */
-    public static RelateCommand create(Index index, RelateCommandType type, Relation relation) {
+    public static Command createCommand(Index index, RelateCommandType type, Relation relation) {
 
         requireNonNull(index);
         requireNonNull(type);
@@ -113,28 +113,73 @@ public class RelateCommand extends Command {
         }
     }
 
+    private String getName1(Relation relation) {
+        String[] args = relation.relationName.split("/");
+        return args[0];
+    }
+
+    private String getName2(Relation relation) {
+        String[] args = relation.relationName.split("/");
+        return args[1];
+    }
+
+    private Set<Command> createCommands(Set<Relation> relations, RelateCommandType type, Model model)
+            throws CommandException {
+        Set<Command> commands = new HashSet<>();
+        for (Relation relation: relations) {
+            Index index1 = getIndex(getName1(relation), model);
+            Index index2 = getIndex(getName2(relation), model);
+
+            try {
+                requireNonNull(index1);
+                requireNonNull(index2);
+            } catch (NullPointerException e) {
+                Prefix prefix;
+                if (type == RelateCommandType.ADD) {
+                    prefix = PREFIX_RELATE_ADD;
+                } else {
+                    prefix = PREFIX_RELATE_DELETE;
+                }
+                throw new CommandException(Messages.PERSONS_DOES_NOT_EXIST + " By: " + prefix + relation.relationName);
+            }
+
+            Command command1 = createCommand(index1, type, relation);
+            Command command2 = createCommand(index2, type, relation);
+
+            // Shouldn't be null in all case
+            requireNonNull(command1);
+            requireNonNull(command2);
+
+            commands.add(command1);
+            commands.add(command2);
+        }
+        return commands;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        Index index1 = getIndex(this.name1, model);
-        Index index2 = getIndex(this.name2, model);
 
-        try {
-            requireNonNull(index1);
-            requireNonNull(index2);
+        Set<Command> addCommands = createCommands(relationsToAdd, RelateCommandType.ADD, model);
+        Set<Command> deleteCommands = createCommands(relationsToDelete, RelateCommandType.DELETE, model);
+        List<Command> commands = new ArrayList<>(addCommands);
+        commands.addAll(deleteCommands);
 
-        } catch (NullPointerException e) {
-            throw new CommandException(Messages.PERSONS_DOES_NOT_EXIST);
+        CommandException exceptions = null;
+        CommandResult results = null;
+
+        for (Command command : commands) {
+            try {
+                CommandResult result = command.execute(model);
+                results = CommandResult.merge(results, result);
+            } catch (CommandException ce) {
+                exceptions = CommandException.merge(exceptions, ce);
+            }
         }
 
-        RelateCommand command1 = create(index1, this.type, this.relation);
-        RelateCommand command2 = create(index2, this.type, this.relation);
-
-        requireNonNull(command1);
-        requireNonNull(command2);
-        CommandResult result1 = command1.execute(model);
-        CommandResult result2 = command2.execute(model);
-
-        return CommandResult.merge(result1, result2);
+        if (exceptions != null) {
+            throw exceptions;
+        } else {
+            return results;
+        }
     }
 }

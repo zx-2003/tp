@@ -1,6 +1,7 @@
 package seedu.tutor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_DELETE;
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,11 +16,12 @@ import seedu.tutor.model.person.Person;
 import seedu.tutor.model.relation.Relation;
 
 /**
- * Deletes relation(s) from specified Person.
+ * Deletes one relation from specified Person.
  */
-public class RelateDeleteCommand extends RelateCommand {
+public class RelateDeleteCommand extends Command {
 
-    public static final String MESSAGE_INVALID_RELATION_TO_DELETE = "The relation does not exist in Person";
+    public static final String MESSAGE_RELATE_SUCCESS = "Updated relation to Person: %1$s";
+    public static final String MESSAGE_INVALID_RELATION_TO_DELETE = "The relation does not exist in Person.";
 
     private final Index index;
     private final Relation relationToDelete;
@@ -30,7 +32,6 @@ public class RelateDeleteCommand extends RelateCommand {
      * to the command factory in {@link RelateCommand}.
      */
     RelateDeleteCommand(Index index, Relation relationToDelete) {
-        super(relationToDelete, RelateCommandType.DELETE);
         requireNonNull(index);
         requireNonNull(relationToDelete);
 
@@ -53,7 +54,8 @@ public class RelateDeleteCommand extends RelateCommand {
         Set<Relation> originalRelations = personToDeleteRelation.getRelations();
 
         if (!originalRelations.contains(relationToDelete)) {
-            throw new CommandException(MESSAGE_INVALID_RELATION_TO_DELETE);
+            throw new CommandException(MESSAGE_INVALID_RELATION_TO_DELETE
+                    + " By: " + PREFIX_RELATE_DELETE + this.relationToDelete.relationName);
         }
 
         Person addedRelationPerson = createDeleteRelationPerson(personToDeleteRelation, relationToDelete);

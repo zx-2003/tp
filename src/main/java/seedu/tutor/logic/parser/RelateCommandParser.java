@@ -2,16 +2,12 @@ package seedu.tutor.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.tutor.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.tutor.logic.Messages.REPEATED_ARGUMENT;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_ADD;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_DELETE;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATION;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 import seedu.tutor.logic.commands.RelateCommand;
 import seedu.tutor.logic.parser.exceptions.ParseException;
@@ -21,11 +17,6 @@ import seedu.tutor.model.relation.Relation;
  * Parses input arguments and returns a new RelateCommand object
  */
 public class RelateCommandParser implements Parser<RelateCommand> {
-
-    private static final Map<Prefix, RelateCommand.RelateCommandType> relateCommandTypeMap = Map.of(
-            PREFIX_RELATE_ADD, RelateCommand.RelateCommandType.ADD,
-            PREFIX_RELATE_DELETE, RelateCommand.RelateCommandType.DELETE
-    );
 
     /**
      * Parses the given {@code String} of arguments in the context of the RelateCommand
@@ -38,30 +29,66 @@ public class RelateCommandParser implements Parser<RelateCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_RELATE_ADD, PREFIX_RELATE_DELETE);
 
-        Relation relation;
-
         // errors
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()
-                || argMultimap.getValue(PREFIX_EMAIL).isPresent()
-                || argMultimap.getValue(PREFIX_PHONE).isPresent()
-                || argMultimap.getValue(PREFIX_ADDRESS).isPresent()
-                || argMultimap.getValue(PREFIX_TAG).isPresent()
-                || argMultimap.getValue(PREFIX_RELATION).isPresent()) {
+        if (argMultimap.getAllValues(PREFIX_RELATE_ADD).isEmpty()
+                && argMultimap.getAllValues(PREFIX_RELATE_DELETE).isEmpty() || !validCommandFormat(args)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RelateCommand.MESSAGE_USAGE));
         }
 
-        // currently assume only one operation per command
-        // can expand to add and/or delete of multiple relation per command
-        if (argMultimap.getValue(PREFIX_RELATE_ADD).isPresent()) {
-            relation = ParserUtil.parseRelation(argMultimap.getValue(PREFIX_RELATE_ADD).get());
-            return new RelateCommand(relation, relateCommandTypeMap.get(PREFIX_RELATE_ADD));
-        } else if (argMultimap.getValue(PREFIX_RELATE_DELETE).isPresent()) {
-            relation = ParserUtil.parseRelation(argMultimap.getValue(PREFIX_RELATE_DELETE).get());
-            return new RelateCommand(relation, relateCommandTypeMap.get(PREFIX_RELATE_DELETE));
-        } else {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RelateCommand.MESSAGE_USAGE));
+        Set<Relation> relationsToAdd = new HashSet<>();
+        Set<Relation> relationsToDelete = new HashSet<>();
+        if (!argMultimap.getAllValues(PREFIX_RELATE_ADD).isEmpty()) {
+            for (String rel : argMultimap.getAllValues(PREFIX_RELATE_ADD)) {
+                Relation relation = ParserUtil.parseRelation(rel);
+                if (relationsToAdd.contains(relation)) {
+                    throw new ParseException(REPEATED_ARGUMENT);
+                }
+                relationsToAdd.add(relation);
+            }
         }
+        if (!argMultimap.getAllValues(PREFIX_RELATE_DELETE).isEmpty()) {
+            for (String rel : argMultimap.getAllValues(PREFIX_RELATE_DELETE)) {
+                Relation relation = ParserUtil.parseRelation(rel);
+                if (relationsToDelete.contains(relation)) {
+                    throw new ParseException(REPEATED_ARGUMENT);
+                }
+                relationsToDelete.add(relation);
+            }
+        }
+
+        return new RelateCommand(relationsToAdd, relationsToDelete);
+    }
+
+    /**
+     * A linear string checker.
+     * @param args The user's input.
+     * @return The validity of the user's input for relate command.
+     */
+    private boolean validCommandFormat(String args) {
+        args = args.trim();
+        int len = args.length();
+        int accu = 0;
+        char[] arr = args.toCharArray();
+        int index = 2;
+
+        if (!(args.startsWith("a\\") || args.startsWith("d\\"))) {
+            return false;
+        }
+
+        while (index != len) {
+            Character current = arr[index];
+            if (current.equals('/')) {
+                accu++;
+            } else if (current.equals('\\')) {
+                accu = 0;
+            }
+
+            if (accu > 3) {
+                return false;
+            }
+            index++;
+        }
+        return true;
     }
 }

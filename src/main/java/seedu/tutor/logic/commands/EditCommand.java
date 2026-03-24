@@ -80,13 +80,42 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        editPersonDescriptor.setRelations(null);
+        // Get the existing related relations
+        Set<Relation> oldRelations = personToEdit.getRelations();
+        // Clear all related relations
+        Command deleteOldRelations = new RelateCommand(new HashSet<>(), oldRelations);
+        deleteOldRelations.execute(model);
+        // Renew the personToEdit
+        personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        String oldName = personToEdit.getName().fullName;
+        String newName = editedPerson.getName().fullName;
+        Set<Relation> newRelations = oldRelations;
+        Command addNewRelations = new RelateCommand(newRelations, new HashSet<>());
+        if (!oldName.equals(newName) && !oldRelations.isEmpty()) {
+            newRelations = new HashSet<>();
+            for (Relation relation: oldRelations) {
+                newRelations.add(relation.changePerson(oldName, newName));
+            }
+            // Only renew adddNewRelations when the name is changed
+            // and there is some relation related to that person
+            addNewRelations = new RelateCommand(newRelations, new HashSet<>());
+        }
+
+        // Update the person
         model.setPerson(personToEdit, editedPerson);
+        // If name is changed, add the updated relation back, else add back the old relations
+        addNewRelations.execute(model);
+        // Update the editedPerson to correctly contains the updated relations
+        editPersonDescriptor.setRelations(newRelations);
+        editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        // Shows the changed editedPerson
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
