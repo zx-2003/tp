@@ -181,10 +181,12 @@ Notes:
 * `RELATION2` refers to how `NAME2` is related to `NAME1`.  eg. `Teacher Alex/Bernice Yu/Teacher/Student` means that `Bernice Yu` is `Teacher Alex`'s `Student`
 * The command is case-sensitive for `NAME` e.g. `David` will not match `david`
 * The command is case-sensitive for `RELATION` e.g. `Student` will not match `student`
+* Supports addition and deletion operations in the same command e.g. 
 
 Examples:
 * `relate a\Teacher Alex/Bernice Yu/Teacher/Student` will create a relation for both `Teacher Alex` and `Bernice Yu`.
 * `relate d\Teacher Alex/Bernice Yu/Teacher/Student` will delete the relation for both `Teacher Alex` and `Bernice Yu`
+* `relate a\Bernice Yu/Alex Yeoh/parent/child d\David Li/Charlotte Oliveiro/brother1/brother2` will delete add a relation for `Bernice Yu` and `Alex Yeoh` and delete the relation for `David Li` and `Charlotte Oliveiro`
 
 ### <span id="deleting-person"></span>Deleting a person : `delete`
 
