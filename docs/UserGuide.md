@@ -169,16 +169,16 @@ Notes:
 
 Adds a relation between 2 specified people in TutorMap.
 
-Command format (adding relation): `relate a\NAME 1/NAME 2/RELATION 1/RELATION 2`  
-Command format (deleting relation): `relate d\NAME 1/NAME 2/RELATION 1/RELATION 2`
+Command format (adding relation): `relate a\NAME1/NAME2/RELATION1/RELATION2`  
+Command format (deleting relation): `relate d\NAME1/NAME2/RELATION1/RELATION2`
 
 Notes: 
 * To add a relation, both names must exist.
 * To delete the relation, all the names and relations must match an existing relation in the same format.
 * The relation will be updated for both persons.
 * Upon adding, `Person 1` and how `Person 2` is related to them will be shown on `Person 1`'s contact, and vice versa for `Person 2`.
-* `RELATION 1` refers to how `NAME 1` is related to `NAME 2`. eg. `Teacher Alex/Bernice Yu/Teacher/Student` means that `Teacher Alex` is `Bernice Yu`'s `Teacher`
-* `RELATION 2` refers to how `NAME 2` is related to `NAME 1`.  eg. `Teacher Alex/Bernice Yu/Teacher/Student` means that `Bernice Yu` is `Teacher Alex`'s `Student`
+* `RELATION1` refers to how `NAME1` is related to `NAME2`. eg. `Teacher Alex/Bernice Yu/Teacher/Student` means that `Teacher Alex` is `Bernice Yu`'s `Teacher`
+* `RELATION2` refers to how `NAME2` is related to `NAME1`.  eg. `Teacher Alex/Bernice Yu/Teacher/Student` means that `Bernice Yu` is `Teacher Alex`'s `Student`
 * The command is case-sensitive for `NAME` e.g. `David` will not match `david`
 * The command is case-sensitive for `RELATION` e.g. `Student` will not match `student`
 
@@ -254,5 +254,5 @@ Action     | Format, Examples
 **Find (by relation)**   | `find r/KEYWORD` e.g., `find r/mother`, `find r/Alex Yeoh/Bernice Yu`
 **List**   | `list`
 **Help**   | `help`
-**Relate** (add) | `relate a\NAME 1/NAME 2/RELATION 1/RELATION 2`<br> e.g., `relate a\Teacher Alex/Bernice Yu/Teacher/Student`
-**Relate** (delete)| `relate d\NAME 1/NAME 2/RELATION 1/RELATION 2`<br> e.g., `relate d\Teacher Alex/Bernice Yu/Teacher/Student`
+**Relate** (add) | `relate a\NAME1/NAME2/RELATION1/RELATION2`<br> e.g., `relate a\Teacher Alex/Bernice Yu/Teacher/Student`
+**Relate** (delete)| `relate d\NAME1/NAME2/RELATION1/RELATION2`<br> e.g., `relate d\Teacher Alex/Bernice Yu/Teacher/Student`
