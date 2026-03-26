@@ -10,6 +10,7 @@ import static seedu.tutor.commons.util.AppUtil.checkArgument;
 public class Relation {
 
     public static final String MESSAGE_CONSTRAINTS = "Relations should contain name1/name2/relation1/relation2";
+    public static final String MESSAGE_SAME_PERSON = "name1 and name2 should be different";
     public static final String VALIDATION_REGEX = "([^/]+)/([^/]+)/([^/]+)/([^/]+)";
 
     public final String relationName;
