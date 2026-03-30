@@ -6,13 +6,13 @@ import java.util.stream.Collectors;
 
 import seedu.tutor.model.ReadOnlyTutorMap;
 import seedu.tutor.model.TutorMap;
+import seedu.tutor.model.label.Label;
 import seedu.tutor.model.person.Address;
 import seedu.tutor.model.person.Email;
 import seedu.tutor.model.person.Name;
 import seedu.tutor.model.person.Person;
 import seedu.tutor.model.person.Phone;
 import seedu.tutor.model.relation.Relation;
-import seedu.tutor.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code TutorMap} with sample data.
@@ -52,15 +52,15 @@ public class SampleDataUtil {
     /**
      * Returns a tag set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings) {
+    public static Set<Label> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(Label::new)
                 .collect(Collectors.toSet());
     }
 
-    public static Set<Tag> getSubjectSet(String... strings) {
+    public static Set<Label> getSubjectSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(Label::new)
                 .collect(Collectors.toSet());
     }
 

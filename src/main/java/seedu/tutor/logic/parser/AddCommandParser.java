@@ -14,13 +14,13 @@ import java.util.stream.Stream;
 
 import seedu.tutor.logic.commands.AddCommand;
 import seedu.tutor.logic.parser.exceptions.ParseException;
+import seedu.tutor.model.label.Label;
 import seedu.tutor.model.person.Address;
 import seedu.tutor.model.person.Email;
 import seedu.tutor.model.person.Name;
 import seedu.tutor.model.person.Person;
 import seedu.tutor.model.person.Phone;
 import seedu.tutor.model.relation.Relation;
-import seedu.tutor.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -48,9 +48,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Label> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Relation> relationList = ParserUtil.parseRelations(argMultimap.getAllValues(PREFIX_RELATION));
-        Set<Tag> subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
+        Set<Label> subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
 
         Person person = new Person(name, phone, email, address, tagList, relationList, subjectList);
 

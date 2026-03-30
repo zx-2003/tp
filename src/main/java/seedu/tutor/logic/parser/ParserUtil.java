@@ -9,12 +9,12 @@ import java.util.Set;
 import seedu.tutor.commons.core.index.Index;
 import seedu.tutor.commons.util.StringUtil;
 import seedu.tutor.logic.parser.exceptions.ParseException;
+import seedu.tutor.model.label.Label;
 import seedu.tutor.model.person.Address;
 import seedu.tutor.model.person.Email;
 import seedu.tutor.model.person.Name;
 import seedu.tutor.model.person.Phone;
 import seedu.tutor.model.relation.Relation;
-import seedu.tutor.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -102,21 +102,21 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
+    public static Label parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        if (!Label.isValidTagName(trimmedTag)) {
+            throw new ParseException(Label.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Label(trimmedTag);
     }
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static Set<Label> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
+        final Set<Label> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }
@@ -129,21 +129,21 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code Subject} is invalid.
      */
-    public static Tag parseSubject(String subject) throws ParseException {
+    public static Label parseSubject(String subject) throws ParseException {
         requireNonNull(subject);
         String trimmedSubject = subject.trim();
-        if (!Tag.isValidTagName(trimmedSubject)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        if (!Label.isValidTagName(trimmedSubject)) {
+            throw new ParseException(Label.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedSubject);
+        return new Label(trimmedSubject);
     }
 
     /**
      * Parses {@code Collection<String> subjects} into a {@code Set<Tag>}.
      */
-    public static Set<Tag> parseSubjects(Collection<String> tags) throws ParseException {
+    public static Set<Label> parseSubjects(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        final Set<Tag> subjectSet = new HashSet<>();
+        final Set<Label> subjectSet = new HashSet<>();
         for (String tagName : tags) {
             subjectSet.add(parseTag(tagName));
         }

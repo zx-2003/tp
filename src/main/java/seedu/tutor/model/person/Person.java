@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.tutor.commons.util.ToStringBuilder;
+import seedu.tutor.model.label.Label;
 import seedu.tutor.model.relation.Relation;
-import seedu.tutor.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -24,16 +24,16 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Label> tags = new HashSet<>();
     private final Set<Relation> relations = new HashSet<>();
     // private final String subject;
-    private final Set<Tag> subject = new HashSet<>();
+    private final Set<Label> subject = new HashSet<>();
 
     /**
      * Complete constructor for person, other constructors kept for dependency to be removed over time
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Set<Tag> tags, Set<Relation> relations, Set<Tag> subject) {
+                  Set<Label> tags, Set<Relation> relations, Set<Label> subject) {
         requireAllNonNull(name, phone, email, address, tags, relations, subject);
         this.name = name;
         this.phone = phone;
@@ -60,7 +60,7 @@ public class Person {
         return address;
     }
 
-    public Set<Tag> getSubjects() {
+    public Set<Label> getSubjects() {
         return Collections.unmodifiableSet(subject);
     }
 
@@ -68,7 +68,7 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
+    public Set<Label> getTags() {
         return Collections.unmodifiableSet(tags);
     }
 

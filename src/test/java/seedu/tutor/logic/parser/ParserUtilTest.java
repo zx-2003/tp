@@ -14,11 +14,11 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.tutor.logic.parser.exceptions.ParseException;
+import seedu.tutor.model.label.Label;
 import seedu.tutor.model.person.Address;
 import seedu.tutor.model.person.Email;
 import seedu.tutor.model.person.Name;
 import seedu.tutor.model.person.Phone;
-import seedu.tutor.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -163,14 +163,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
+        Label expectedTag = new Label(VALID_TAG_1);
         assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
+        Label expectedTag = new Label(VALID_TAG_1);
         assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
     }
 
@@ -191,8 +191,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Set<Label> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        Set<Label> expectedTagSet = new HashSet<Label>(Arrays.asList(new Label(VALID_TAG_1), new Label(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }
@@ -210,14 +210,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseSubject_validValueWithoutWhitespace_returnsSubject() throws Exception {
-        Tag expectedSubject = new Tag(VALID_SUBJECT_1);
+        Label expectedSubject = new Label(VALID_SUBJECT_1);
         assertEquals(expectedSubject, ParserUtil.parseSubject(VALID_SUBJECT_1));
     }
 
     @Test
     public void parseSubject_validValueWithWhitespace_returnsTrimmedSubject() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_SUBJECT_1 + WHITESPACE;
-        Tag expectedSubject = new Tag(VALID_SUBJECT_1);
+        Label expectedSubject = new Label(VALID_SUBJECT_1);
         assertEquals(expectedSubject, ParserUtil.parseTag(tagWithWhitespace));
     }
 }

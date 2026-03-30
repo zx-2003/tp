@@ -5,13 +5,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.tutor.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.tutor.model.label.Label;
 import seedu.tutor.model.person.Address;
 import seedu.tutor.model.person.Email;
 import seedu.tutor.model.person.Name;
 import seedu.tutor.model.person.Person;
 import seedu.tutor.model.person.Phone;
 import seedu.tutor.model.relation.Relation;
-import seedu.tutor.model.tag.Tag;
 
 
 /**
@@ -80,7 +80,7 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        Set<Label> tagSet = Stream.of(tags).map(Label::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;
     }
@@ -90,7 +90,7 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withSubjects(String... subjects) {
-        Set<Tag> subjectSet = Stream.of(subjects).map(Tag::new).collect(Collectors.toSet());
+        Set<Label> subjectSet = Stream.of(subjects).map(Label::new).collect(Collectors.toSet());
         descriptor.setSubjects(subjectSet);
         return this;
     }

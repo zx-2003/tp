@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.tutor.commons.util.ToStringBuilder;
-import seedu.tutor.model.tag.Tag;
+import seedu.tutor.model.label.Label;
 
 /**
  * Tests that a {@code Person}'s {@code Subject} string contains a specific substring.
@@ -19,8 +19,8 @@ public class SubjectContainsStringPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        Set<Tag> subjects = person.getSubjects();
-        for (Tag s : subjects) {
+        Set<Label> subjects = person.getSubjects();
+        for (Label s : subjects) {
             if (s.tagName.toLowerCase().contains(string.toLowerCase())) {
                 return true;
             }

@@ -3,13 +3,13 @@ package seedu.tutor.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.tutor.model.label.Label;
 import seedu.tutor.model.person.Address;
 import seedu.tutor.model.person.Email;
 import seedu.tutor.model.person.Name;
 import seedu.tutor.model.person.Person;
 import seedu.tutor.model.person.Phone;
 import seedu.tutor.model.relation.Relation;
-import seedu.tutor.model.tag.Tag;
 import seedu.tutor.model.util.SampleDataUtil;
 
 /**
@@ -26,8 +26,8 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
-    private Set<Tag> subjects;
+    private Set<Label> tags;
+    private Set<Label> subjects;
     private Set<Relation> relations;
 
     /**

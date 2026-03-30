@@ -22,13 +22,13 @@ import seedu.tutor.commons.util.ToStringBuilder;
 import seedu.tutor.logic.Messages;
 import seedu.tutor.logic.commands.exceptions.CommandException;
 import seedu.tutor.model.Model;
+import seedu.tutor.model.label.Label;
 import seedu.tutor.model.person.Address;
 import seedu.tutor.model.person.Email;
 import seedu.tutor.model.person.Name;
 import seedu.tutor.model.person.Person;
 import seedu.tutor.model.person.Phone;
 import seedu.tutor.model.relation.Relation;
-import seedu.tutor.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -131,9 +131,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Label> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Relation> updatedRelations = editPersonDescriptor.getRelations().orElse(personToEdit.getRelations());
-        Set<Tag> updatedSubject = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
+        Set<Label> updatedSubject = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 updatedRelations, updatedSubject);
@@ -172,9 +172,9 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<Tag> tags;
+        private Set<Label> tags;
         private Set<Relation> relations;
-        private Set<Tag> subjects;
+        private Set<Label> subjects;
 
         public EditPersonDescriptor() {}
 
@@ -235,7 +235,7 @@ public class EditCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
+        public void setTags(Set<Label> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
@@ -244,7 +244,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Tag>> getTags() {
+        public Optional<Set<Label>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
@@ -252,7 +252,7 @@ public class EditCommand extends Command {
          * Sets {@code subjects} to this object's {@code subjects}.
          * A defensive copy of {@code subjects} is used internally.
          */
-        public void setSubjects(Set<Tag> subjects) {
+        public void setSubjects(Set<Label> subjects) {
             this.subjects = (subjects != null) ? new HashSet<>(subjects) : null;
         }
 
@@ -261,7 +261,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code subjects} is null.
          */
-        public Optional<Set<Tag>> getSubjects() {
+        public Optional<Set<Label>> getSubjects() {
             return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
         }
 

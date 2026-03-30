@@ -40,12 +40,12 @@ import org.junit.jupiter.api.Test;
 
 import seedu.tutor.logic.Messages;
 import seedu.tutor.logic.commands.AddCommand;
+import seedu.tutor.model.label.Label;
 import seedu.tutor.model.person.Address;
 import seedu.tutor.model.person.Email;
 import seedu.tutor.model.person.Name;
 import seedu.tutor.model.person.Person;
 import seedu.tutor.model.person.Phone;
-import seedu.tutor.model.tag.Tag;
 import seedu.tutor.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
@@ -192,11 +192,11 @@ public class AddCommandParserTest {
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Label.MESSAGE_CONSTRAINTS);
 
         // invalid subject
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_SUBJECT_DESC, Tag.MESSAGE_CONSTRAINTS);
+                + INVALID_SUBJECT_DESC, Label.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,

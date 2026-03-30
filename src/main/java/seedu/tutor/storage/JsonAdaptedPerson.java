@@ -10,13 +10,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.tutor.commons.exceptions.IllegalValueException;
+import seedu.tutor.model.label.Label;
 import seedu.tutor.model.person.Address;
 import seedu.tutor.model.person.Email;
 import seedu.tutor.model.person.Name;
 import seedu.tutor.model.person.Person;
 import seedu.tutor.model.person.Phone;
 import seedu.tutor.model.relation.Relation;
-import seedu.tutor.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -82,12 +82,12 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Label> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
 
-        final List<Tag> personSubjects = new ArrayList<>();
+        final List<Label> personSubjects = new ArrayList<>();
         for (JsonAdaptedTag subject : subject) {
             personSubjects.add(subject.toModelType());
         }
@@ -129,9 +129,9 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelSubject = new HashSet<>(personSubjects);
+        final Set<Label> modelSubject = new HashSet<>(personSubjects);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Label> modelTags = new HashSet<>(personTags);
 
         final Set<Relation> modelRelations = new HashSet<>(personRelations);
 

@@ -10,8 +10,8 @@ import java.util.Set;
 
 import seedu.tutor.logic.commands.AddCommand;
 import seedu.tutor.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.tutor.model.label.Label;
 import seedu.tutor.model.person.Person;
-import seedu.tutor.model.tag.Tag;
 
 /**
  * A utility class for Person.
@@ -50,7 +50,7 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
+            Set<Label> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {

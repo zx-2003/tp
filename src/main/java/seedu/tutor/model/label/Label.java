@@ -1,4 +1,4 @@
-package seedu.tutor.model.tag;
+package seedu.tutor.model.label;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.tutor.commons.util.AppUtil.checkArgument;
@@ -7,7 +7,7 @@ import static seedu.tutor.commons.util.AppUtil.checkArgument;
  * Represents a Tag in the tutormap.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
-public class Tag {
+public class Label {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
@@ -19,7 +19,7 @@ public class Tag {
      *
      * @param tagName A valid tag name.
      */
-    public Tag(String tagName) {
+    public Label(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
@@ -39,11 +39,11 @@ public class Tag {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Tag)) {
+        if (!(other instanceof Label)) {
             return false;
         }
 
-        Tag otherTag = (Tag) other;
+        Label otherTag = (Label) other;
         return tagName.equals(otherTag.tagName);
     }
 

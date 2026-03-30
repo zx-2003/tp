@@ -18,7 +18,7 @@ import seedu.tutor.commons.core.index.Index;
 import seedu.tutor.logic.commands.EditCommand;
 import seedu.tutor.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.tutor.logic.parser.exceptions.ParseException;
-import seedu.tutor.model.tag.Tag;
+import seedu.tutor.model.label.Label;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -77,7 +77,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    private Optional<Set<Label>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
 
         if (tags.isEmpty()) {
@@ -92,7 +92,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code subjects} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Tag>> parseSubjectsForEdit(Collection<String> subjects) throws ParseException {
+    private Optional<Set<Label>> parseSubjectsForEdit(Collection<String> subjects) throws ParseException {
         assert subjects != null;
 
         if (subjects.isEmpty()) {
