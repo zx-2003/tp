@@ -5,19 +5,19 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 TutorMap *-right-> "1" UniquePersonList
-TutorMap *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+TutorMap *-right-> "1" UniqueLabelList
+UniqueLabelList -[hidden]down- UniquePersonList
+UniqueLabelList -[hidden]down- UniquePersonList
 
-UniqueTagList -right-> "*" Tag
+UniqueLabelList -right-> "*" Label
 UniquePersonList -right-> Person
 
-Person -up-> "*" Tag
+Person -up-> "*" Label
 
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> Subject
-Person *--> Relation
+Person *--> "*" Subject
+Person *--> "*" Relation
 @enduml
