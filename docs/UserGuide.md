@@ -168,9 +168,11 @@ Notes:
 * The search is case-insensitive: e.g `hans` will match `Hans`
 * As relations are bidirectional, searching `Bernice Yu/Alex Yeoh` is equivalent to searching `Alex Yeoh/Bernice Yu`
 * Partial matches are allowed. For example, searching `r` will return results everyone that has a relation containing `r`
-* Example: `r/mother` will find everyone who is a mother, or has a mother
-* Example: `r/Alex Yeoh` will find everyone related to Alex Yeoh and himself
-* Example: `r/a` will find everyone who has the letter `a` in the relation (matching names and/or roles)
+
+Examples: 
+* `r/mother` will find everyone who is a mother, or has a mother
+* `r/Alex Yeoh` will find everyone related to Alex Yeoh and himself
+* `r/a` will find everyone who has the letter `a` in the relation (matching names and/or roles)
 
 ### <span id="relating-persons"></span>Adding or deleting a relation : `relate`
 
