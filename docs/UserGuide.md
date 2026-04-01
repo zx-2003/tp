@@ -156,7 +156,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-* 
+
 ### <span id="finding-persons-by-relation"></span>Locating persons by relation: `find r/KEYWORD`
 
 Finds persons that have a relation containing the keyword.
@@ -171,6 +171,26 @@ Notes:
 * Example: `r/mother` will find everyone who is a mother, or has a mother
 * Example: `r/Alex Yeoh` will find everyone related to Alex Yeoh and himself
 * Example: `r/a` will find everyone who has the letter `a` in the relation (matching names and/or roles)
+
+### <span id="finding-persons-by-subject"></span>Locating persons by subject: `find s/KEYWORD`
+
+Finds persons that have a subject containing the keyword.
+
+Command format: `find s/KEYWORD`
+
+Notes:
+* The search is case-insensitive: e.g `Math` will match `math`
+* Partial matches are allowed. For example, searching `M` will return results everyone that has a subject label containing `M`
+* Example: `s/Math` will find everyone labelled with the subject that is or contains `Math`
+* Example: `s/C` will find everyone who is labelled with the subject that is or contains `C` (e.g. `Chemistry`, `Science`)
+
+<box type="tip" seamless>
+
+**Tip:**
+To find persons with a specific subject, find subjects by typing the full subject name such as `s/Chinese` or `s/Chemistry`.
+Simply typing `s/C` will match both Chemistry and Chinese subjects!
+
+</box>
 
 ### <span id="relating-persons"></span>Adding or deleting a relation : `relate`
 
