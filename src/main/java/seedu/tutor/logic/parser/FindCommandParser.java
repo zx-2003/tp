@@ -7,6 +7,7 @@ import java.util.Arrays;
 import seedu.tutor.logic.commands.FindCommand;
 import seedu.tutor.logic.parser.exceptions.ParseException;
 import seedu.tutor.model.person.NameContainsKeywordsPredicate;
+import seedu.tutor.model.person.PhoneNumberContainsStringPredicate;
 import seedu.tutor.model.person.RelationContainsStringPredicate;
 import seedu.tutor.model.person.SubjectContainsStringPredicate;
 
@@ -36,6 +37,23 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
 
             return new FindCommand(new RelationContainsStringPredicate(trimmed));
+        }
+
+        if (trimmedArgs.startsWith("p/")) {
+            String trimmed = trimmedArgs.substring(2).trim();
+            String slashRegex = "[ /]+$";
+            String numberRegex = "^[0-9]+$";
+            if (trimmed.isEmpty() || trimmed.matches(slashRegex)) {
+                throw new ParseException("Keyword missing! Please specify a non-space, non-slash keyword after 'p/' \n"
+                        + "Example: find p/12345678");
+            }
+
+            if (!trimmed.matches(numberRegex)) {
+                throw new ParseException("Input is not a valid number. "
+                        + "Please enter numbers with no special characters.");
+            }
+
+            return new FindCommand(new PhoneNumberContainsStringPredicate(trimmed));
         }
 
         if (trimmedArgs.startsWith("s/")) {
