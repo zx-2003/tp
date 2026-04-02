@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.tutor.logic.commands.FindCommand;
 import seedu.tutor.model.person.NameContainsKeywordsPredicate;
+import seedu.tutor.model.person.SubjectContainsStringPredicate;
 
 public class FindCommandParserTest {
 
@@ -29,6 +30,26 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validSubjectArgs_returnsFindCommand() {
+        FindCommand expectedFindCommand = new FindCommand(new SubjectContainsStringPredicate("Math"));
+        assertParseSuccess(parser, "s/Math", expectedFindCommand);
+
+        FindCommand expectedFindCommandWithWhitespace =
+                new FindCommand(new SubjectContainsStringPredicate("Science"));
+        assertParseSuccess(parser, " \n s/   Science  ", expectedFindCommandWithWhitespace);
+    }
+
+    @Test
+    public void parse_invalidSubjectArgs_throwsParseException() {
+        String expectedMessage = "Keyword missing! Please specify a non-space, "
+                + "non-slash keyword (subject) after 's/' \n"
+                + "Example: find s/Math, find s/Science";
+
+        assertParseFailure(parser, "s/", expectedMessage);
+        assertParseFailure(parser, "s/   ", expectedMessage);
     }
 
 }
