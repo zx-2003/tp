@@ -5,6 +5,7 @@ import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_ADD;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_DELETE;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,6 +46,7 @@ public class RelateCommand extends Command {
 
     private final Set<Relation> relationsToAdd;
     private final Set<Relation> relationsToDelete;
+    private HashMap<String, Index> nameToIndexMap = new HashMap<>();
 
     /**
      * Return a command that add and/or delete multiple relation.
@@ -64,7 +66,7 @@ public class RelateCommand extends Command {
      * @param relation The relation object that represent the relation between two contact.
      * @return Subtype of RelateCommand.
      */
-    public static Command createCommand(Index index, RelateCommandType type, Relation relation) {
+    private static Command createCommand(Index index, RelateCommandType type, Relation relation) {
 
         requireNonNull(index);
         requireNonNull(type);
@@ -95,19 +97,26 @@ public class RelateCommand extends Command {
      * @return The index in the form of Index object.
      */
     private Index getIndex(String name, Model model) {
+
+        if (nameToIndexMap.containsKey(name)) {
+            return this.nameToIndexMap.get(name);
+        }
+
         ObservableList<Person> persons = model.getTutorMap().getPersonList();
-        int index = -1;
+        int ind = -1;
 
         // I'm not very sure if this always returns the correct index
         for (int i = 0; i < persons.size(); i++) {
             Person currentPerson = persons.get(i);
             if (currentPerson.getName().toString().equals(name)) {
-                index = i;
+                ind = i;
             }
         }
 
-        if (index != -1) {
-            return Index.fromZeroBased(index);
+        if (ind != -1) {
+            Index index = Index.fromZeroBased(ind);
+            this.nameToIndexMap.put(name, index);
+            return index;
         } else {
             return null;
         }
