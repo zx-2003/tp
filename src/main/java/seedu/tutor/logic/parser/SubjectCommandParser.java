@@ -56,6 +56,25 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
             return new SubjectCommand(null, SubjectCommand.SubjectCommandType.CHANGE, labels);
         }
 
+        if (argMultimap.getValue(PREFIX_DELETE_SUBJECT).isPresent()) {
+            String temp0 = argMultimap.getValue(PREFIX_DELETE_SUBJECT).get();
+            String[] temp1 = temp0.split("/");
+            if (temp1.length == 0 || temp0.endsWith("/") || index != null) {
+                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
+            }
+            Label[] labels = new Label[temp1.length];
+            for (int i = 0; i < temp1.length; i++) {
+                Label temp;
+                try {
+                    temp = ParserUtil.parseTag(temp1[i]);
+                } catch (ParseException pe) {
+                    throw new ParseException(SUBJECT_NAME_ERROR);
+                }
+                labels[i] = temp;
+            }
+            return new SubjectCommand(null, SubjectCommand.SubjectCommandType.DELETE, labels);
+        }
+
         if (argMultimap.getValue(PREFIX_EDIT_SUBJECT).isPresent()) {
             String temp0 = argMultimap.getValue(PREFIX_EDIT_SUBJECT).get();
             String[] temp1 = temp0.split("/");
@@ -72,7 +91,6 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
                 }
                 labels[i] = temp;
             }
-
             return new SubjectCommand(index, SubjectCommand.SubjectCommandType.EDIT, labels);
         }
 
