@@ -65,9 +65,22 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        if (trimmedArgs.startsWith("n/")) {
+            String trimmed = trimmedArgs.substring(2).trim();
+            String slashRegex = "[ /]+$";
+            if (trimmed.isEmpty() || trimmed.matches(slashRegex)) {
+                throw new ParseException("Keyword missing! Please specify a non-space, "
+                        + "non-slash keyword (name) after 'n/' \n"
+                        + "Example: find n/Bob, find n/Alice Bob");
+            }
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            String[] nameKeywords = trimmed.split("\\s+");
+
+            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        }
+
+        throw new ParseException("Prefix missing! Find must be followed by either 'n/', 's/', 'a/', 'p/' or 'r/' "
+                + "depending on what field is being searched for.");
     }
 
 }

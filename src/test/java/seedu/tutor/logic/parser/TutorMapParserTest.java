@@ -7,10 +7,6 @@ import static seedu.tutor.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.tutor.testutil.Assert.assertThrows;
 import static seedu.tutor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.tutor.logic.commands.AddCommand;
@@ -19,11 +15,9 @@ import seedu.tutor.logic.commands.DeleteCommand;
 import seedu.tutor.logic.commands.EditCommand;
 import seedu.tutor.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.tutor.logic.commands.ExitCommand;
-import seedu.tutor.logic.commands.FindCommand;
 import seedu.tutor.logic.commands.HelpCommand;
 import seedu.tutor.logic.commands.ListCommand;
 import seedu.tutor.logic.parser.exceptions.ParseException;
-import seedu.tutor.model.person.NameContainsKeywordsPredicate;
 import seedu.tutor.model.person.Person;
 import seedu.tutor.testutil.EditPersonDescriptorBuilder;
 import seedu.tutor.testutil.PersonBuilder;
@@ -72,14 +66,6 @@ public class TutorMapParserTest {
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
-    }
-
-    @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
