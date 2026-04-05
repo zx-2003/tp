@@ -256,6 +256,20 @@ Examples:
 * `a/Street` will find everyone whose address contains `Street`
 * `a/l` will find everyone whose address contains `l`
 
+### <span id="finding-persons-by-phone"></span>Locating persons by phone: `find p/KEYWORD`
+
+Finds persons that have a phone number containing the keyword.
+
+Command format: `find p/KEYWORD`
+
+Notes:
+* The search will only accept numbers
+* Partial searching is supported (i.e. `find p/21` will display anyone with `21` in their numbers)
+* Order of the characters matter. For example, `p/123` is not the same as `p/321`
+
+Examples:
+* `p/8` will find everyone whose number contains `8`
+
 ### <span id="relating-persons"></span>Adding or deleting a relation : `relate`
 
 Adds a relation between 2 specified people in TutorMap.
