@@ -19,8 +19,6 @@ public class ChangeSubjectCommand extends Command {
 
     private final Label oldSubject;
     private final Label newSubject;
-    private final EditCommandParser parser = new EditCommandParser();
-
     /**
      * Returns a Command object that changes a particular subject across the whole list.
      * @param oldSubject The name of the subject to be changed.

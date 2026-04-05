@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.tutor.logic.commands.exceptions.CommandException;
-import seedu.tutor.logic.parser.EditCommandParser;
 import seedu.tutor.model.Model;
 import seedu.tutor.model.label.Label;
 import seedu.tutor.model.person.Person;
@@ -17,15 +16,14 @@ import seedu.tutor.model.person.Person;
  */
 public class DeleteSubjectCommand extends Command {
 
-    private final Label[] sujectsToDelete;
-    private final EditCommandParser parser = new EditCommandParser();
+    private final Label[] subjectsToDelete;
 
     /**
      * Returns a DeleteSubjectCommand object that deletes subject's across all person.
      * @param subjectsToDelete An array of subject/s as Label object to be deleted.
      */
     protected DeleteSubjectCommand(Label[] subjectsToDelete) {
-        this.sujectsToDelete = subjectsToDelete;
+        this.subjectsToDelete = subjectsToDelete;
     }
 
     @Override
@@ -36,7 +34,7 @@ public class DeleteSubjectCommand extends Command {
         Set<Label> deletedSubjects = new HashSet<>();
 
         for (Person currentPerson : persons) {
-            for (Label subjectToDelete : sujectsToDelete) {
+            for (Label subjectToDelete : subjectsToDelete) {
                 if (checkPersonContainSubject(currentPerson, subjectToDelete)) {
                     Person personDeletedSubject = createDeleteSubjectPerson(currentPerson, subjectToDelete);
                     model.setPerson(currentPerson, personDeletedSubject);

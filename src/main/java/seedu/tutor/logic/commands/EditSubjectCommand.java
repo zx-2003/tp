@@ -23,7 +23,6 @@ public class EditSubjectCommand extends Command {
 
     private final Index index;
     private final Label[] subjectsToEdits;
-    private final EditCommandParser parser = new EditCommandParser();
 
     /**
      * Returns a EditSubjectCommand object which edits a peron's subject field with xor operation.
