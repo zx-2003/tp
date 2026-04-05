@@ -225,6 +225,20 @@ Simply typing `s/C` will match both Chemistry and Chinese subjects!
 
 </box>
 
+### <span id="finding-persons-by-email"></span>Locating persons by email: `find e/KEYWORD`
+
+Finds persons that have an email containing the keyword.
+
+Command format: `find e/KEYWORD`
+
+Notes:
+* The search is case-insensitive: For example, `John@FAKEMAIL.com` will match `john@fakemail.com`
+* Partial matches are allowed. For example, searching `M` will display everyone that has an email address containing the letter `M`
+
+Examples:
+* `e/gmail` will find everyone whose email contains `gmail`
+* `e/C` will find everyone who is labelled with the subject that is or contains `C` (e.g. `clara@fakemail.com`, `example@example.com`)
+
 ### <span id="relating-persons"></span>Adding or deleting a relation : `relate`
 
 Adds a relation between 2 specified people in TutorMap.
