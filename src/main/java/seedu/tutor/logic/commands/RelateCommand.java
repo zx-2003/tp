@@ -3,6 +3,7 @@ package seedu.tutor.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_ADD;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_DELETE;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,14 +36,19 @@ public class RelateCommand extends Command {
 
     public static final String COMMAND_WORD = "relate";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add or delete a relation between two person.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds or deletes a relation between two persons.\n"
             + "Parameters: "
-            + "[" + PREFIX_RELATE_ADD + "RELATION] "
-            + "or "
-            + "[" + PREFIX_RELATE_DELETE + "RELATION]\n"
-            + "RELATION format: [Person1/Person2/Relation Name1/Relation Name2]\n"
+            + "[" + PREFIX_RELATE_ADD + "RELATION]... "
+            + "[" + PREFIX_RELATE_DELETE + "RELATION]...\n"
+
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_RELATE_ADD + "Linq/Keiran/teammate/teammate ";
+            + PREFIX_RELATE_ADD + "Linq/Keiran/teammate/teammate\n"
+
+            + "Notes: \n"
+            + "⚠ " + PREFIX_RELATE_ADD + ", " + PREFIX_RELATE_DELETE + " uses backslash (\\), not forward slash (/).\n"
+            + "- RELATION format: [Person1/Person2/Relation-Name1/Relation-Name2]\n"
+            + "- " + PREFIX_RELATE_ADD + ", " + PREFIX_RELATE_DELETE + "are optional, but at least one must be present.\n"
+            + "- " + PREFIX_RELATE_ADD + ", " + PREFIX_RELATE_DELETE + " can be used once or multiple times.";
 
     private final Set<Relation> relationsToAdd;
     private final Set<Relation> relationsToDelete;
