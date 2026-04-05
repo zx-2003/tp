@@ -19,7 +19,7 @@ public class DeleteSubjectCommand extends Command {
     private final Label[] subjectsToDelete;
 
     /**
-     * Returns a DeleteSubjectCommand object that deletes subjects across all person.
+     * Returns a DeleteSubjectCommand object that deletes subject(s) across all person.
      * @param subjectsToDelete An array of subject(s) as Label object to be deleted.
      */
     protected DeleteSubjectCommand(Label[] subjectsToDelete) {
