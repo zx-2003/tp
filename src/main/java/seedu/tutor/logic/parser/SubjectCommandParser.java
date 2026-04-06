@@ -37,14 +37,14 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
         }
 
         if (countChar(args, '\\') != 1) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubjectCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_SUBJECT_RENAME).isPresent()) {
             String userInput = argMultimap.getValue(PREFIX_SUBJECT_RENAME).get();
             String[] subjects = userInput.split("/");
             if (subjects.length != 2 || userInput.endsWith("/") || index != null) {
-                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubjectCommand.MESSAGE_USAGE));
             }
             Label[] inputSubjects = getSubjectLabels(subjects);
             return new SubjectCommand(null, SubjectCommand.SubjectCommandType.RENAME, inputSubjects);
@@ -54,7 +54,7 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
             String userInput = argMultimap.getValue(PREFIX_SUBJECT_DELETE).get();
             String[] subjects = userInput.split("/");
             if (subjects.length == 0 || userInput.endsWith("/") || index != null) {
-                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubjectCommand.MESSAGE_USAGE));
             }
             Label[] inputSubjects = getSubjectLabels(subjects);
             return new SubjectCommand(null, SubjectCommand.SubjectCommandType.DELETE, inputSubjects);
@@ -64,13 +64,13 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
             String userInput = argMultimap.getValue(PREFIX_SUBJECT_EDIT).get();
             String[] subjects = userInput.split("/");
             if (subjects.length == 0 || userInput.endsWith("/") || index == null) {
-                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubjectCommand.MESSAGE_USAGE));
             }
             Label[] inputSubjects = getSubjectLabels(subjects);
             return new SubjectCommand(index, SubjectCommand.SubjectCommandType.EDIT, inputSubjects);
         }
 
-        throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubjectCommand.MESSAGE_USAGE));
     }
 
     /**
