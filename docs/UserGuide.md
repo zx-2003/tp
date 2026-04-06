@@ -15,7 +15,7 @@ TutorMap offers you a simple way to stay organized without complex software. If 
   - [Adding or deleting a relation : `relate`](#relating-persons)
   - [Locating persons by name: `find`](#finding-persons)
   - [Locating persons by relation: `find r/`](#finding-persons-by-relation)
-  - [Renaming, deleting or editing a subject : `subject`](#span-idsubject-commandspanchanging-deleting-or-editing-subjects-subject)
+  - [Renaming, deleting or editing subject(s): `subject`](#span-idsubject-commandspanchanging-deleting-or-editing-subjects-subject)
   - [Deleting a person : `delete`](#deleting-person)
   - [Clearing all entries : `clear`](#clearing-entries)
   - [Exiting the program : `exit`](#exiting-program)
