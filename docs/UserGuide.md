@@ -224,7 +224,7 @@ Simply typing `s/C` will match both Chemistry and Chinese subjects!
 
 </box>
 
-### <span id="subject-command"></span>Rename, deleting, or editing subject(s): `subject`
+### <span id="subject-command"></span>Renaming, deleting, or editing subject(s): `subject`
 
 Renames a subject name across all persons, deletes subject(s) across all persons, or edits one person's subject field.
 
