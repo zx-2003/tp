@@ -223,28 +223,38 @@ Simply typing `s/C` will match both Chemistry and Chinese subjects!
 
 </box>
 
-### <span id="relating-persons"></span>Adding or deleting a relation : `relate`
+### <span id="subject-command"></span>Changing, deleting, or editing subject(s): `subject`
 
-Adds a relation between 2 specified people in TutorMap.
+Changes a subject name across all persons, deletes subject(s) across all persons, or edits one person's subject field.
 
-Command format (adding relation): `relate a\NAME1/NAME2/RELATION1/RELATION2`  
-Command format (deleting relation): `relate d\NAME1/NAME2/RELATION1/RELATION2`
+Command format (change a subject's name): `subject c\SUBJECT1/SUBJECT2`  
+Command format (delete subject(s)): `subject d\SUBJECT1/SUBJECT2/SUBJECT3/...`  
+Command format (edit a person's subject field): `subject INDEX e\SUBJECT1/SUBJECT2/SUBJECT3/...`
 
-Notes: 
-* To add a relation, both names must exist.
-* To delete the relation, all the names and relations must match an existing relation in the same format.
-* The relation will be updated for both persons.
-* Upon adding, `Person 1` and how `Person 2` is related to them will be shown on `Person 1`'s contact, and vice versa for `Person 2`.
-* `RELATION1` refers to how `NAME1` is related to `NAME2`. eg. `Teacher Alex/Bernice Yu/Teacher/Student` means that `Teacher Alex` is `Bernice Yu`'s `Teacher`
-* `RELATION2` refers to how `NAME2` is related to `NAME1`.  eg. `Teacher Alex/Bernice Yu/Teacher/Student` means that `Bernice Yu` is `Teacher Alex`'s `Student`
-* The command is case-sensitive for `NAME` e.g. `David` will not match `david`
-* The command is case-sensitive for `RELATION` e.g. `Student` will not match `student`
-* Supports addition and deletion operations in the same command e.g. 
+Notes:
+* All `SUBJECT` values must be alphanumeric and non-empty.
+* For changing a subject's name:
+    * `c\SUBJECT1/SUBJECT2` changes every instance of `SUBJECT1` to `SUBJECT2` across all persons' subject fields.
+    * Changing a non-existing `SUBJECT` is allowed. `No subject changed.` will be returned.
+* For deleting subject(s):
+    * `d\SUBJECT1/SUBJECT2/SUBJECT3` deletes every instance of `SUBJECT1`, `SUBJECT2`, and `SUBJECT3` across all persons' subject fields.
+    * `d\` accepts any positive number of subjects.
+    * Deleting a non-existing `SUBJECT` is allowed. `No subject deleted.` will be returned.
+* For editing a person's subject field:
+    * `INDEX e\SUBJECT1/SUBJECT2/...` edits the `INDEX`-th shown person's subject field by toggling each listed subject.
+    * `Index` must be a positive integer.
+    * Toggling means:
+        * an existing subject is removed;
+        * a missing subject is added.
+    * `e\` accepts any positive number of subjects.
+    * This command may add and remove subjects in a single use.
 
-Examples:
-* `relate a\Teacher Alex/Bernice Yu/Teacher/Student` will create a relation for both `Teacher Alex` and `Bernice Yu`.
-* `relate d\Teacher Alex/Bernice Yu/Teacher/Student` will delete the relation for both `Teacher Alex` and `Bernice Yu`
-* `relate a\Bernice Yu/Alex Yeoh/parent/child d\David Li/Charlotte Oliveiro/brother1/brother2` will add a relation for `Bernice Yu` and `Alex Yeoh` and delete the relation for `David Li` and `Charlotte Oliveiro`
+Example:
+* `subject c\Maths/Mathematics`
+* `subject d\Mathematics/Mandrin`
+* `subject d\Biology/Physic/Chemistry/History/Art`
+* `subject 1 e\Maths/Biology`
+* `subject 2 e\Physic/Chemistry/History/Art`
 
 ### <span id="deleting-person"></span>Deleting a person : `delete`
 
