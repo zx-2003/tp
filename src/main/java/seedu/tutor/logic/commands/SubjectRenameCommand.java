@@ -12,14 +12,14 @@ import seedu.tutor.model.label.Label;
 import seedu.tutor.model.person.Person;
 
 /**
- * Changes a subject name across the whole list.
+ * Renames a subject across the whole list.
  */
 public class SubjectRenameCommand extends Command {
 
     private final Label oldSubject;
     private final Label newSubject;
     /**
-     * Returns a Command object that changes a particular subject across the whole list.
+     * Returns a Command object that renames a particular subject across the whole list.
      * @param oldSubject The name of the subject to be changed.
      * @param newSubject The name of the subject after changed.
      */
@@ -38,7 +38,7 @@ public class SubjectRenameCommand extends Command {
 
         for (Person currentPerson : persons) {
             if (checkPersonContainSubject(currentPerson, this.oldSubject)) {
-                Person personChangedSubject = createChangeSubjectPerson(currentPerson, this.oldSubject,
+                Person personChangedSubject = createRenameSubjectPerson(currentPerson, this.oldSubject,
                         this.newSubject);
                 model.setPerson(currentPerson, personChangedSubject);
                 isChanged = true;
@@ -46,32 +46,32 @@ public class SubjectRenameCommand extends Command {
         }
 
         if (isChanged) {
-            return new CommandResult("Subject changed: " + oldSubject.labelName + " has changed to "
+            return new CommandResult("Subject renamed: " + oldSubject.labelName + " has renamed to "
                 + newSubject.labelName + ".");
         } else {
-            return new CommandResult("No subject changed.");
+            return new CommandResult("No subject renamed.");
         }
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToChangeSubject}
+     * Creates and returns a {@code Person} with the details of {@code personToRenameSubject}
      */
-    private static Person createChangeSubjectPerson(Person personToChangeSubject, Label oldSubject, Label newSubject) {
-        requireNonNull(personToChangeSubject);
+    private static Person createRenameSubjectPerson(Person personToRenameSubject, Label oldSubject, Label newSubject) {
+        requireNonNull(personToRenameSubject);
         requireNonNull(oldSubject);
         requireNonNull(newSubject);
 
-        Set<Label> updatedSubjects = new HashSet<>(personToChangeSubject.getSubjects()); // Original subjects
+        Set<Label> updatedSubjects = new HashSet<>(personToRenameSubject.getSubjects()); // Original subjects
         updatedSubjects.remove(oldSubject);
         updatedSubjects.add(newSubject);
 
         return new Person(
-                personToChangeSubject.getName(),
-                personToChangeSubject.getPhone(),
-                personToChangeSubject.getEmail(),
-                personToChangeSubject.getAddress(),
-                personToChangeSubject.getTags(),
-                personToChangeSubject.getRelations(),
+                personToRenameSubject.getName(),
+                personToRenameSubject.getPhone(),
+                personToRenameSubject.getEmail(),
+                personToRenameSubject.getAddress(),
+                personToRenameSubject.getTags(),
+                personToRenameSubject.getRelations(),
                 updatedSubjects
         );
     }
