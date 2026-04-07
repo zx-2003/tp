@@ -77,7 +77,7 @@ public class TutorMapParser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommand(arguments);
 
         case RelateCommand.COMMAND_WORD:
             return new RelateCommandParser().parse(arguments);
