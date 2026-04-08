@@ -30,7 +30,7 @@ public class SubjectDeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> persons = model.getTutorMap().getPersonList();
+        List<Person> persons = model.getFilteredPersonList();
         Set<Label> deletedSubjects = new HashSet<>();
 
         for (Person currentPerson : persons) {
