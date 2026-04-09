@@ -183,7 +183,7 @@ Finds and displays anyone who has the KEYWORD contained in their field specified
 
 Examples:
 * `find n/John` will find everyone with `john` in their name
-* `find n/John Bill` will find everyone with `john` OR `bill` in in their name 
+* `find n/John Bill` will find everyone with `john` OR `bill` in their name 
 * `find t/online` will find everyone labelled with a tag that is or contains `online`
 * `find r/mother` will find everyone who is a mother, or has a mother
 * `find r/brother/sister` will find all brothers who have sister(s), and sisters who have brother(s)
