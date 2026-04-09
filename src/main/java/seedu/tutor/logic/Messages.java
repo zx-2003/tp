@@ -19,8 +19,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String PERSONS_DOES_NOT_EXIST = "The provided person name does not exist.";
-    public static final String RELATIONS_ALREADY_EXIST = "The relation already exists.";
+    public static final String PERSONS_DOES_NOT_EXIST = "The provided person name does not exist";
+    public static final String RELATIONS_ALREADY_EXIST = "The relation already exists";
     public static final String REPEATED_ARGUMENT = "Repeated argument(s) detected.";
     /**
      * Returns an error message indicating the duplicate prefixes.

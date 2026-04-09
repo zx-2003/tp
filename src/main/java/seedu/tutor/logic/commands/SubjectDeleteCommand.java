@@ -12,14 +12,14 @@ import seedu.tutor.model.label.Label;
 import seedu.tutor.model.person.Person;
 
 /**
- * Deletes subject(s) across all person
+ * Deletes subject(s) across displayed persons.
  */
 public class SubjectDeleteCommand extends Command {
 
     private final Label[] subjectsToDelete;
 
     /**
-     * Returns a DeleteSubjectCommand object that deletes subject(s) across all person.
+     * Returns a DeleteSubjectCommand object that deletes subject(s) across displayed persons.
      * @param subjectsToDelete An array of subject(s) as Label object to be deleted.
      */
     protected SubjectDeleteCommand(Label[] subjectsToDelete) {

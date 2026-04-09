@@ -11,7 +11,7 @@ import seedu.tutor.model.Model;
 import seedu.tutor.model.label.Label;
 
 /**
- * Changes the Subject field of a Person, or renames/deletes a subject across all Persons.
+ * Changes the Subject field of a Person, or renames/deletes a subject across displayed persons.
  */
 public class SubjectCommand extends Command {
 
