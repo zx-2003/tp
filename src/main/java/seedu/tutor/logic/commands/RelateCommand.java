@@ -162,11 +162,11 @@ public class RelateCommand extends Command {
             boolean isRelationExist1 = relationExist(index1, relation, model);
             boolean isRelationExist2 = relationExist(index2, relation, model);
             if (type == RelateCommandType.ADD && (isRelationExist1 || isRelationExist2)) {
-                throw new CommandException(Messages.RELATIONS_ALREADY_EXIST + " By: "
+                throw new CommandException(Messages.RELATIONS_ALREADY_EXIST + ": "
                         + PREFIX_RELATE_ADD + relation.relationName);
             } else if (type == RelateCommandType.DELETE && !(isRelationExist1 && isRelationExist2)) {
                 throw new CommandException(MESSAGE_INVALID_RELATION_TO_DELETE
-                        + " By: " + PREFIX_RELATE_DELETE + relation.relationName);
+                        + ": " + PREFIX_RELATE_DELETE + relation.relationName);
             }
 
             Command command1 = createCommand(index1, type, relation);

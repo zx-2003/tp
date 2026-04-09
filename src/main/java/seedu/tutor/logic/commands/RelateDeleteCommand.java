@@ -21,7 +21,7 @@ import seedu.tutor.model.relation.Relation;
 public class RelateDeleteCommand extends Command {
 
     public static final String MESSAGE_RELATE_SUCCESS = "Updated relation to Person: %1$s";
-    public static final String MESSAGE_INVALID_RELATION_TO_DELETE = "The relation does not exist in Person.";
+    public static final String MESSAGE_INVALID_RELATION_TO_DELETE = "The relation does not exist in Person";
 
     private final Index index;
     private final Relation relationToDelete;
@@ -55,7 +55,7 @@ public class RelateDeleteCommand extends Command {
 
         if (!originalRelations.contains(relationToDelete)) {
             throw new CommandException(MESSAGE_INVALID_RELATION_TO_DELETE
-                    + " By: " + PREFIX_RELATE_DELETE + this.relationToDelete.relationName);
+                    + ": " + PREFIX_RELATE_DELETE + this.relationToDelete.relationName);
         }
 
         Person addedRelationPerson = createDeleteRelationPerson(personToDeleteRelation, relationToDelete);
