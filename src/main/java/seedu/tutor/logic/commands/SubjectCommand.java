@@ -54,6 +54,9 @@ public class SubjectCommand extends Command {
      * @param subjects Subjects in Label type.
      */
     public SubjectCommand(Index index, SubjectCommandType type, Label[] subjects) {
+        requireNonNull(index);
+        requireNonNull(type);
+        assert subjects != null && subjects.length != 0;
         this.index = index;
         this.type = type;
         this.subjects = subjects;
