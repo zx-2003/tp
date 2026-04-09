@@ -253,7 +253,7 @@ Notes:
 * For deleting subject(s):
     * `d\SUBJECT1/SUBJECT2/SUBJECT3` deletes every instance of `SUBJECT1`, `SUBJECT2`, and `SUBJECT3` across all persons' subject fields.
     * `d\` accepts any positive number of subjects.
-    * Deleting a non-existing `SUBJECT` is allowed. `No subject deleted.` will be returned if no subject is deleted.
+    * Deleting a non-existing `SUBJECT` is not allowed.
 * For editing a person's subject field:
     * `INDEX e\SUBJECT1/SUBJECT2/...` edits the `INDEX`-th shown person's subject field by toggling each listed subject.
     * `Index` must be a positive integer.
@@ -264,7 +264,7 @@ Notes:
     * This command may add and remove subjects in a single use.
 * For renaming a subject:
     * `r\SUBJECT1/SUBJECT2` renames every instance of `SUBJECT1` to `SUBJECT2` across all persons' subject fields.
-    * Renaming a non-existing `SUBJECT` is allowed. `No subject renamed.` will be returned if no subject is renamed.
+    * Renaming a non-existing `SUBJECT` is not allowed.
 
 Example:
 * `subject d\Mathematics/Mandrin`
