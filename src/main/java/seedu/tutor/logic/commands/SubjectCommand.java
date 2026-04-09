@@ -17,7 +17,8 @@ public class SubjectCommand extends Command {
 
     public static final String COMMAND_WORD = "subject";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Renames a subject name across all currently listed persons, "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Renames a subject name "
+            + "across all currently listed persons, "
             + "deletes subject(s) across all currently listed persons, or edits one person's subject field.\n"
 
             + "Parameters: only one out of the following:\n"
