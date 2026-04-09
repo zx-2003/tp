@@ -3,6 +3,7 @@ package seedu.tutor.logic.parser;
 import static seedu.tutor.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
+import java.util.Map;
 
 import seedu.tutor.logic.commands.FindCommand;
 import seedu.tutor.logic.parser.exceptions.ParseException;
@@ -19,6 +20,19 @@ import seedu.tutor.model.person.TagContainsStringPredicate;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
+    private static final String WARNING = "Keyword missing! Please specify a non-space, non-slash keyword after ";
+
+    public static final Map<String, String> PREFIX_WARNINGS = Map.of(
+            "r/", WARNING + "'r/' \nExample: find r/Alex Yeoh, find r/parent",
+            "n/", WARNING + "'n/' \nExample: find n/Bob, find n/Alice Bob",
+            "p/", WARNING + "'p/' \nExample: find p/12345678",
+            "a/", WARNING + "'a/' \nExample: find a/Woodlands, find a/Blk",
+            "t/", WARNING + "'t/' \nExample: find t/friend, find t/homework",
+            "s/", WARNING + "'s/' \nExample: find s/Math, find s/Science",
+            "e/", WARNING + "'e/' \nExample: find e/gmail, find e/alexyeoh123@fakemail.com"
+    );
+
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -31,99 +45,59 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if (trimmedArgs.startsWith("r/")) {
-            String trimmed = trimmedArgs.substring(2).trim();
-            String slashRegex = "[ /]+$";
-            if (trimmed.isEmpty() || trimmed.matches(slashRegex)) {
-                throw new ParseException("Keyword missing! Please specify a non-space, non-slash keyword after 'r/' \n"
-                        + "Example: find r/Alex Yeoh, find r/parent");
-            }
+        if (!beginsWithValidPrefix(trimmedArgs)) {
+            throw new ParseException("Prefix missing/invalid! Find must be followed by either "
+                    + "'n/', 'a/', 'p/', 'e/', 's/', 'r/' or 't/' "
+                    + "depending on what field is being searched for.");
+        }
 
+        assert trimmedArgs.length() > 1 : "Arg should have length of at least 2";
+        String prefix = trimmedArgs.substring(0, 2);
+        String trimmed = trimmedArgs.substring(2).trim();
+        String slashRegex = "[ /]+$";
+
+        if (trimmed.isEmpty() || trimmed.matches(slashRegex)) {
+            throw new ParseException(PREFIX_WARNINGS.get(prefix));
+        }
+
+        switch (prefix) {
+        case "r/":
             return new FindCommand(new RelationContainsStringPredicate(trimmed));
-        }
-
-        if (trimmedArgs.startsWith("p/")) {
-            String trimmed = trimmedArgs.substring(2).trim();
-            String slashRegex = "[ /]+$";
-            String numberRegex = "^[0-9]+$";
-            if (trimmed.isEmpty() || trimmed.matches(slashRegex)) {
-                throw new ParseException("Keyword missing! Please specify a number after 'p/' \n"
-                        + "Example: find p/12345678");
-            }
-
-            if (!trimmed.matches(numberRegex)) {
-                throw new ParseException("Input is not a valid number. "
-                        + "Please enter numbers with no special characters.");
-            }
-
-            return new FindCommand(new PhoneNumberContainsStringPredicate(trimmed));
-        }
-
-        if (trimmedArgs.startsWith("s/")) {
-            String trimmed = trimmedArgs.substring(2).trim();
-            String slashRegex = "[ /]+$";
-            if (trimmed.isEmpty() || trimmed.matches(slashRegex)) {
-                throw new ParseException("Keyword missing! Please specify a non-space, "
-                        + "non-slash keyword (subject) after 's/' \n"
-                        + "Example: find s/Math, find s/Science");
-            }
-
-            return new FindCommand(new SubjectContainsStringPredicate(trimmed));
-        }
-
-        if (trimmedArgs.startsWith("t/")) {
-            String trimmed = trimmedArgs.substring(2).trim();
-            String slashRegex = "[ /]+$";
-            if (trimmed.isEmpty() || trimmed.matches(slashRegex)) {
-                throw new ParseException("Keyword missing! Please specify a non-space, "
-                        + "non-slash keyword (tag) after 't/' \n"
-                        + "Example: find t/friend, find t/homework");
-            }
-
-            return new FindCommand(new TagContainsStringPredicate(trimmed));
-        }
-
-        if (trimmedArgs.startsWith("a/")) {
-
-            String trimmed = trimmedArgs.substring(2).trim();
-            String slashRegex = "[ /]+$";
-            if (trimmed.isEmpty() || trimmed.matches(slashRegex)) {
-                throw new ParseException("Keyword missing! Please specify an address after 'a/' \n"
-                        + "Example: find a/Woodlands, find a/Blk");
-            }
-
-            return new FindCommand(new AddressContainsStringPredicate(trimmed));
-
-        }
-
-        if (trimmedArgs.startsWith("n/")) {
-            String trimmed = trimmedArgs.substring(2).trim();
-            String slashRegex = "[ /]+$";
-            if (trimmed.isEmpty() || trimmed.matches(slashRegex)) {
-                throw new ParseException("Keyword missing! Please specify a name or multiple names after 'n/' \n"
-                        + "Example: find n/Bob, find n/Alice Bob");
-            }
-
+        case "n/":
             String[] nameKeywords = trimmed.split("\\s+");
-
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        }
-
-        if (trimmedArgs.startsWith("e/")) {
-            String trimmed = trimmedArgs.substring(2).trim();
-            String slashRegex = "[ /]+$";
-            if (trimmed.isEmpty() || trimmed.matches(slashRegex)) {
-                throw new ParseException("Keyword missing! Please specify a non-space, "
-                        + "non-slash keyword (email) after 'e/' \n"
-                        + "Example: find e/gmail, find e/alexyeoh123@fakemail.com");
-            }
-
+        case "p/":
+            return new FindCommand(new PhoneNumberContainsStringPredicate(trimmed));
+        case "a/":
+            return new FindCommand(new AddressContainsStringPredicate(trimmed));
+        case "t/":
+            return new FindCommand(new TagContainsStringPredicate(trimmed));
+        case "s/":
+            return new FindCommand(new SubjectContainsStringPredicate(trimmed));
+        case "e/":
             return new FindCommand(new EmailContainsStringPredicate(trimmed));
+        default:
+            throw new ParseException("An unexpected error has occurred.");
         }
 
-        throw new ParseException("Prefix missing! Find must be followed by either "
-                + "'n/', 'a/', 'p/', 'e/', 's/', 'r/' or 't/' "
-                + "depending on what field is being searched for.");
+    }
+
+    /**
+     * Checks if the string begins with a valid prefix "e/", "a/", "n/", "r/", "s/", "t/", or "p/".
+     * @param string String being checked.
+     * @return true if string is valid, false otherwise.
+     */
+    private boolean beginsWithValidPrefix(String string) {
+        String[] validPrefixes = { "e/", "a/", "n/", "r/", "s/", "t/", "p/" };
+
+        for (String validPrefix : validPrefixes) {
+            if (string.startsWith(validPrefix)) {
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
 }

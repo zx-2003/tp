@@ -41,9 +41,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_invalidSubjectArgs_throwsParseException() {
-        String expectedMessage = "Keyword missing! Please specify a non-space, "
-                + "non-slash keyword (subject) after 's/' \n"
-                + "Example: find s/Math, find s/Science";
+        String expectedMessage = FindCommandParser.PREFIX_WARNINGS.get("s/");
 
         assertParseFailure(parser, "s/", expectedMessage);
         assertParseFailure(parser, "s/   ", expectedMessage);
@@ -51,9 +49,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_invalidTagArgs_throwsParseException() {
-        String expectedMessage = "Keyword missing! Please specify a non-space, "
-                + "non-slash keyword (tag) after 't/' \n"
-                + "Example: find t/friend, find t/homework";
+        String expectedMessage = FindCommandParser.PREFIX_WARNINGS.get("t/");
 
         assertParseFailure(parser, "t/", expectedMessage);
         assertParseFailure(parser, "t/   ", expectedMessage);
