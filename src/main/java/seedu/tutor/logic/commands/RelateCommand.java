@@ -158,7 +158,8 @@ public class RelateCommand extends Command {
                 throw new CommandException(Messages.PERSONS_DOES_NOT_EXIST + " By: " + prefix + relation.relationName);
             }
 
-            boolean isRelationExist = relationExist(index1, relation, model);
+            // Checks the presence of relations
+            boolean isRelationExist = relationExist(index1, relation, model) && relationExist(index2, relation, model);
             if (type == RelateCommandType.ADD && isRelationExist) {
                 throw new CommandException(Messages.RELATIONS_ALREADY_EXIST + " By: "
                         + PREFIX_RELATE_ADD + relation.relationName);
