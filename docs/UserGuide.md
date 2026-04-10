@@ -201,7 +201,7 @@ Examples:
 * `find s/Math Science` will find everyone labelled with the subject that is or contains `Math` OR `Science`
 * `find e/gmail` will find everyone whose email contains `gmail`
 * `find a/Blk` will find everyone whose address contains `Blk`
-* `find p/8` will find everyone whose number contains `8`
+* `find p/8` will find everyone whose phone number contains `8`
 
 ### <span id="subject-command"></span>Renaming, deleting, or editing subject(s): `subject`
 
