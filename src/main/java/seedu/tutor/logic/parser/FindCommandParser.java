@@ -71,9 +71,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         case "a/":
             return new FindCommand(new AddressContainsStringPredicate(trimmed));
         case "t/":
-            return new FindCommand(new TagContainsStringPredicate(trimmed));
+            String[] tagKeywords = trimmed.split("\\s+");
+            return new FindCommand(new TagContainsStringPredicate(Arrays.asList(tagKeywords)));
         case "s/":
-            return new FindCommand(new SubjectContainsStringPredicate(trimmed));
+            String[] subjectKeywords = trimmed.split("\\s+");
+            return new FindCommand(new SubjectContainsStringPredicate(Arrays.asList(subjectKeywords)));
         case "e/":
             return new FindCommand(new EmailContainsStringPredicate(trimmed));
         default:

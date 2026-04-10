@@ -186,20 +186,22 @@ Notes:
 * All searches are case-insensitive. e.g. `hans` will match `Hans`
 * Partial searching is supported. However, it is advised to be as specific as possible. While the app supports a command that looks like `find r/ce/bo`, resulting in relations between `Alice` and `Bob` to appear, the freedom may seem unintuitive.
 * As relations are bidirectional, `find r/Bernice Yu/Alex Yeoh` is equivalent to `find r/Alex Yeoh/Bernice Yu`
-* Special note about finding by name: Supports multiple inputs. `find n/Sally David` will display anyone who has *either* `Sally` or `David` in their name.
+* Find by name, subject and tag supports multiple inputs. `find n/Sally David` will display anyone who has *either* `Sally` or `David` in their name, and similarly for subjects and tags.
 
 Examples:
 * `find n/John` will find everyone with `john` in their name
 * `find n/John Bill` will find everyone with `john` OR `bill` in their name 
 * `find t/online` will find everyone labelled with a tag that is or contains `online`
+* `find t/online offline` will find everyone labelled with a tag that is or contains `online` OR `offline`
 * `find r/mother` will find everyone who is a mother, or has a mother
 * `find r/brother/sister` will find all brothers who have sister(s), and sisters who have brother(s)
 * `find r/Alex Yeoh` will find everyone related to Alex Yeoh and himself
 * `find r/Alex Yeoh/Bernice Yu` will display both people to see the relations between them
 * `find s/Math` will find everyone labelled with the subject that is or contains `Math`
+* `find s/Math Science` will find everyone labelled with the subject that is or contains `Math` OR `Science`
 * `find e/gmail` will find everyone whose email contains `gmail`
 * `find a/Blk` will find everyone whose address contains `Blk`
-* `find p/8` will find everyone whose number contains `8`
+* `find p/8` will find everyone whose phone number contains `8`
 
 ### <span id="subject-command"></span>Renaming, deleting, or editing subject(s): `subject`
 
@@ -299,7 +301,7 @@ Action     | Format, Examples
 **Clear**  | `clear confirm`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT]... [t/TAG]...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find n/NAME [MORE_NAMES]` e.g., `find n/James Jake` <br> `find r/RELATION` e.g., `find r/mother`, `find r/Alex Yeoh/Bernice Yu` <br> `find a/ADDRESS` e.g., `find a/Blk`, `find a/kent ridge` <br> `find e/EMAIL` e.g., `find e/john@fakemail.com`, `find e/gmail` <br> `find p/PHONE` e.g., `find p/999`, `find p/8` <br> `find s/SUBJECT` e.g., `find s/Math`, `find s/science`
+**Find** | `find n/NAME [MORE_NAMES]` e.g., `find n/James Jake` <br> `find r/RELATION` e.g., `find r/mother`, `find r/Alex Yeoh/Bernice Yu` <br> `find a/ADDRESS` e.g., `find a/Blk`, `find a/kent ridge` <br> `find e/EMAIL` e.g., `find e/john@fakemail.com`, `find e/gmail` <br> `find p/PHONE` e.g., `find p/999`, `find p/8` <br> `find s/SUBJECT [MORE_SUBJECTS]` e.g., `find s/math english` <br> `find t/TAG [MORE_TAGS]` e.g., `find t/paid online`
 **List**   | `list`
 **Help**   | `help`
 **Relate** | `relate [a\RELATION]... [d\RELATION]...`<br> e.g., `relate a\Bernice Yu/Alex Yeoh/parent/child d\David Li/Charlotte Oliveiro/brother1/brother2`
