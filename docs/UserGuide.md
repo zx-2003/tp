@@ -186,17 +186,19 @@ Notes:
 * All searches are case-insensitive. e.g. `hans` will match `Hans`
 * Partial searching is supported. However, it is advised to be as specific as possible. While the app supports a command that looks like `find r/ce/bo`, resulting in relations between `Alice` and `Bob` to appear, the freedom may seem unintuitive.
 * As relations are bidirectional, `find r/Bernice Yu/Alex Yeoh` is equivalent to `find r/Alex Yeoh/Bernice Yu`
-* Special note about finding by name: Supports multiple inputs. `find n/Sally David` will display anyone who has *either* `Sally` or `David` in their name.
+* Find by name, subject and tags supports multiple inputs. `find n/Sally David` will display anyone who has *either* `Sally` or `David` in their name, and similarly for subjects and tags.
 
 Examples:
 * `find n/John` will find everyone with `john` in their name
 * `find n/John Bill` will find everyone with `john` OR `bill` in their name 
 * `find t/online` will find everyone labelled with a tag that is or contains `online`
+* `find t/online offline` will find everyone labelled with a tag that is or contains `online` OR `offline`
 * `find r/mother` will find everyone who is a mother, or has a mother
 * `find r/brother/sister` will find all brothers who have sister(s), and sisters who have brother(s)
 * `find r/Alex Yeoh` will find everyone related to Alex Yeoh and himself
 * `find r/Alex Yeoh/Bernice Yu` will display both people to see the relations between them
 * `find s/Math` will find everyone labelled with the subject that is or contains `Math`
+* `find s/Math Science` will find everyone labelled with the subject that is or contains `Math` OR `Science`
 * `find e/gmail` will find everyone whose email contains `gmail`
 * `find a/Blk` will find everyone whose address contains `Blk`
 * `find p/8` will find everyone whose number contains `8`
