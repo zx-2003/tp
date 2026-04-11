@@ -148,20 +148,24 @@ Adds a relation between 2 specified people in TutorMap.
 
 Command format: `relate [a\RELATION]... [d\RELATION]...`
 
-`RELATION` format: `Person1/Person2/Relation-Name1/Relation-Name2`
+`RELATION` format: `PERSON1/PERSON2/RELATION_NAME1/RELATION_NAME2`
 
 Notes:
-* To add a relation, both names must exist.
-* `NAME1` and `NAME2` must be different, adding relation to the person itself is not allowed.
-* To delete the relation, all the names and relations must match an existing relation in the same format.
-* The relation will be updated for both persons.
-* Upon adding, `Person 1` and how `Person 2` is related to them will be shown on `Person 1`'s contact, and vice versa for `Person 2`.
-* `RELATION1` refers to how `NAME1` is related to `NAME2`. e.g. `Teacher Alex/Bernice Yu/Teacher/Student` means that `Teacher Alex` is `Bernice Yu`'s `Teacher`
-* `RELATION2` refers to how `NAME2` is related to `NAME1`.  e.g. `Teacher Alex/Bernice Yu/Teacher/Student` means that `Bernice Yu` is `Teacher Alex`'s `Student`
+* For `relate` command, at least one argument of `[a\RELATION]` or `[d\RELATION]` is required.
+* For any relation:
+  *  both person must exist.
+  * `PERSON1` and `PERSON2` must be different.
+  * There is no restriction for relation name (except `\` is not allowed).
+* For adding relation, the relation to be added must not exist before adding.
+* For deleting relation, the relation to be deleted must exist before deleting.
+* For adding or deleting of relation, the change of relation field will be updated for both persons.
+* Upon adding, `PERSON1` and how `PERSON2` is related to them will be shown on `PERSON1`'s contact, and vice versa for `PERSON2`.
+* `RELATION_NAME1` refers to how `PERSON1` is related to `PERSON2`. e.g. `Teacher Alex/Bernice Yu/Teacher/Student` means that `Teacher Alex` is `Bernice Yu`'s `Teacher`
+* `RELATION_NAME2` refers to how `PERSON2` is related to `PERSON1`.  e.g. `Teacher Alex/Bernice Yu/Teacher/Student` means that `Bernice Yu` is `Teacher Alex`'s `Student`
 * Relations are bidirectional, `Teacher Alex/Bernice Yu/Teacher/Student` is equivalent to `Bernice Yu/Teacher Alex/Student/Teacher`.
-* The command is case-sensitive for `NAME` e.g. `David` will not match `david`
-* The command is case-sensitive for `RELATION` e.g. `Student` will not match `student`
-* Supports multiple addition and/or deletion operations in the same command e.g. `relate a/a\NAME1/NAME2/RELATION1/RELATION2 d\NAME3/NAME4/RELATION3/RELATION4 ...`, `relate a/NAME1/NAME2/RELATION1/RELATION2 a/NAME3/NAME4/RELATION3/RELATION4 ...`
+* The command is case-sensitive for `PERSON` e.g. `David` will not match `david`
+* The command is case-sensitive for `RELATION_NAME` e.g. `Student` will not match `student`
+* Supports multiple addition and/or deletion operations in the same command e.g. `relate a\RELATION1 d\RELATION2 ...`, `relate a\RELATION1 a\RELATION2 ...`
 
 Examples:
 * `relate a\Teacher Alex/Bernice Yu/Teacher/Student` will create a relation for both `Teacher Alex` and `Bernice Yu`.
@@ -208,9 +212,9 @@ Examples:
 Renames a subject name across all currently listed persons, deletes subject(s) across all currently listed persons, or edits one person's subject field.
 
 Command format: 
-* `subject [r\SUBJECT1/SUBJECT2]`
-* `subject [d\SUBJECT1/SUBJECT2/SUBJECT3/...]`  
-* `subject INDEX [e\SUBJECT1/SUBJECT2/SUBJECT3/...]`
+* `subject r\SUBJECT1/SUBJECT2`
+* `subject d\SUBJECT1[/SUBJECT2/SUBJECT3/...]`  
+* `subject INDEX e\SUBJECT1[/SUBJECT2/SUBJECT3/...]`
 
 Notes:
 * All `SUBJECT` values must be alphanumeric (without whitespaces) only and non-empty.
