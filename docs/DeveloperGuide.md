@@ -341,7 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User performs Listing all Persons (UC01) or Finding a person (UC5)
+1.  User performs Listing all Persons (UC1) or Finding a person (UC5)
 2.  User requests to add a person to the list
 3.  TutorMap adds the person
 
@@ -359,7 +359,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User performs Listing all Persons (UC01) or Finding a person (UC5)
+1.  User performs Listing all Persons (UC1) or Finding a person (UC5)
 2.  User requests to edit a person on the list
 3.  TutorMap edits the person
 
@@ -523,7 +523,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should run on any mainstream OS that supports Java without requiring OS-specific setup beyond Java.
+1.  Should run on any mainstream OS that supports Java without requiring OS-specific setup beyond Java and JDK.
 2.  All user data should be stored locally on the user’s device.
 3.  Should not artificially restrict the number of contacts i.e. performance limited by user's hardware only.
 4.  Should not impose a hard limit on the number of labels per contact.
@@ -561,9 +561,9 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Navigate to the directory containing `tutormap.jar` on the terminal. Run `java -jar tutormap.jar`. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
@@ -607,13 +607,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Testing the ability to modify subjects across the entire list or for specific individuals.
 
-   1. Prerequisites: A mix of contacts with `Math`, `Physics`, `Chemistry`, `Biology`, and 1 subject with both `English` and `History`.
+   1. Prerequisites: A mix of contacts with `Maths`, `Physics`, `Chemistry`, `Biology`, and 1 subject with both `English` and `History`.
       
-   2. Test Case (Global Rename): subject r\Math/Mathematics
-      Expected: Every contact currently in the list who had "Math" now has "Mathematics".
+   2. Test Case (Global Rename in list): subject r\Maths/Mathematics
+      Expected: Every contact currently *in the list* who had "Maths" now has "Mathematics".
       
    3. Test Case (Batch Delete): subject d\Physics/Chemistry/Biology
-      Expected: These three subjects are removed from all contacts in the current list. If any of the subjects do not exist, the command fails.
+      Expected: These three subjects are removed from all contacts *in the current list*. If any of the subjects do not exist, the command fails.
       
    4. Test Case (Toggle Subject via Index): subject 1 e\English/History
       Expected: If Person 1 already had "English", it is removed. If they did not have "History", it is added.
@@ -623,7 +623,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding Contacts
 
-1. Testing the flexibility of the esarch system across different prefixes.
+1. Testing the flexibility of the search system across different prefixes.
 
     1. Test Case (Multiple Name Search): find n/Sally David
        Expected: Lists all persons whose names contain "Sally" OR "David".
@@ -651,6 +651,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. TutorMap does not erase all your data in case a corrupted data file exists. 
-   2. Error messages will show up when the fields are edited from within the app.
-   3. It is advised that the error messages are followed and the data file edited according to the error messages.
+   1. If your changes to the data file makes its format invalid, TutorMap will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+   2. TutorMap does not erase all your data in case an invalid relation exists that still conforms to the relation format `name1/name2/relation1/relation2`. However, it may behave in unexpected ways.
+
