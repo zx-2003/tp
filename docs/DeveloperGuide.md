@@ -609,11 +609,11 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: A mix of contacts with `Maths`, `Physics`, `Chemistry`, `Biology`, and 1 subject with both `English` and `History`.
       
-   2. Test Case (Global Rename): subject r\Maths/Mathematics
-      Expected: Every contact currently in the list who had "Maths" now has "Mathematics".
+   2. Test Case (Global Rename in list): subject r\Maths/Mathematics
+      Expected: Every contact currently *in the list* who had "Maths" now has "Mathematics".
       
    3. Test Case (Batch Delete): subject d\Physics/Chemistry/Biology
-      Expected: These three subjects are removed from all contacts in the current list. If any of the subjects do not exist, the command fails.
+      Expected: These three subjects are removed from all contacts *in the current list*. If any of the subjects do not exist, the command fails.
       
    4. Test Case (Toggle Subject via Index): subject 1 e\English/History
       Expected: If Person 1 already had "English", it is removed. If they did not have "History", it is added.
