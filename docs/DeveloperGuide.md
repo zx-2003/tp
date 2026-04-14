@@ -591,16 +591,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: Ensure that at least two contacts exist e.g. Alex Yeoh (Index 1) and Bernice Yu (Index 2).
    
-   2. Test Case (Add Relation): relate a\Alex Yeoh/Bernice Yu/Tutor/Student
+   2. Test Case (Add Relation): `relate a\Alex Yeoh/Bernice Yu/Tutor/Student`
       Expected: Success message shown. Both Alex and Bernice’s contact cards now display the relationship.
       
-   3. Test Case (Duplicate/Self): relate a\Alex Yeoh/Alex Yeoh/Self/Self
+   3. Test Case (Duplicate/Self): `relate a\Alex Yeoh/Alex Yeoh/Self/Self`
       Expected: Error message. Relations cannot be made to the same person.
       
-   4. Test Case (Delete Relation): relate d\Alex Yeoh/Bernice Yu/Tutor/Student
+   4. Test Case (Delete Relation): `relate d\Alex Yeoh/Bernice Yu/Tutor/Student`
       Expected: Relationship removed from both contacts.
       
-   5. Test Case (Case Sensitivity): relate a\alex yeoh/Bernice Yu/Tutor/Student
+   5. Test Case (Case Sensitivity): `relate a\alex yeoh/Bernice Yu/Tutor/Student`
       Expected: Error message. Contact names are case-sensitive.
 
 ### Managing Subjects
@@ -609,42 +609,42 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: A mix of contacts with `Maths`, `Physics`, `Chemistry`, `Biology`, and 1 subject with both `English` and `History`.
       
-   2. Test Case (Global Rename in list): subject r\Maths/Mathematics
+   2. Test Case (Global Rename in list): `subject r\Maths/Mathematics`
       Expected: Every contact currently *in the list* who had "Maths" now has "Mathematics".
       
-   3. Test Case (Batch Delete): subject d\Physics/Chemistry/Biology
+   3. Test Case (Batch Delete): `subject d\Physics/Chemistry/Biology`
       Expected: These three subjects are removed from all contacts *in the current list*. If any of the subjects do not exist, the command fails.
       
-   4. Test Case (Toggle Subject via Index): subject 1 e\English/History
+   4. Test Case (Toggle Subject via Index): `subject 1 e\English/History`
       Expected: If Person 1 already had "English", it is removed. If they did not have "History", it is added.
       
-   5. Test Case (Invalid Renaming): subject r\NonExistentSubject/NewSubject
+   5. Test Case (Invalid Renaming): `subject r\NonExistentSubject/NewSubject`
       Expected: Error message indicating the source subject does not exist.
 
 ### Finding Contacts
 
 1. Testing the flexibility of the search system across different prefixes.
 
-    1. Test Case (Multiple Name Search): find n/Sally David
-       Expected: Lists all persons whose names contain "Sally" OR "David".
+    1. Test Case (Multiple Name Search): `find n/Sally David`
+        Expected: Lists all persons whose names contain "Sally" OR "David".
        
-   2. Test Case (Partial Phone Search): find p/9123
-       Expected: Lists all persons whose phone numbers contain the sequence "9123".
-       
-   3. Test Case (Relation Search): find r/Alex Yeoh
-       Expected: Displays Alex Yeoh and every person linked to him via a relation.
-       
-   4. Test Case (Case Insensitivity): find s/mAtH
-       Expected: Should successfully find contacts with the subject "Math" (search is case-insensitive, though the add command is case-sensitive).
+    2. Test Case (Partial Phone Search): `find p/9123`
+        Expected: Lists all persons whose phone numbers contain the sequence "9123".
+
+   3. Test Case (Relation Search): `find r/Alex Yeoh`
+           Expected: Displays Alex Yeoh and every person linked to him via a relation.
+
+   4. Test Case (Case Insensitivity): `find s/mAtH`
+           Expected: Should successfully find contacts with the subject "Math" (search is case-insensitive, though the add command is case-sensitive).
 
 ### Editing Contacts (Tags and Subjects)
 
 1. Testing the replacement logic for tags and subjects.
 
-   1. Test Case (Clear Subjects): edit 1 s/
+   1. Test Case (Clear Subjects): `edit 1 s/`
        Expected: Person 1’s subjects are completely cleared.
    
-   2. Test Case (Replace Tags): Person 1 has tag friend. Execute edit 1 t/colleague.
+   2. Test Case (Replace Tags): Person 1 has tag friend. Execute `edit 1 t/colleague`.
        Expected: Person 1 now has only the tag colleague. The tag friend is removed (tags are not cumulative).
 
 ### Saving data
