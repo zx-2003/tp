@@ -13,7 +13,8 @@ TutorMap offers you a simple way to stay organized without complex software. If 
   - [Listing all persons : `list`](#listing-persons)
   - [Editing a person : `edit`](#editing-person)
   - [Adding or deleting a relation : `relate`](#relating-persons)
-  - [Finding persons: `find`](#finding-persons)
+  - [Finding persons (single search): `find`](#finding-persons-single)
+  - [Finding persons (multiple search): `find`](#finding-persons-multiple)
   - [Renaming, deleting or editing subject(s): `subject`](#subject-command)
   - [Deleting a person : `delete`](#deleting-person)
   - [Clearing all entries : `clear`](#clearing-entries)
@@ -176,42 +177,53 @@ Examples:
 * `relate d\Teacher Alex/Bernice Yu/Teacher/Student` will delete the relation for both `Teacher Alex` and `Bernice Yu`
 * `relate a\Bernice Yu/Alex Yeoh/parent/child d\David Li/Charlotte Oliveiro/brother1/brother2` will add a relation for `Bernice Yu` and `Alex Yeoh` and delete the relation for `David Li` and `Charlotte Oliveiro`
 
-### <span id="finding-persons"></span>Finding persons: `find`
+### <span id="finding-persons-single"></span>Finding persons (single search): `find`
 
 Finds and displays anyone who has the KEYWORD contained in their field specified by the prefix.
 
-Command format: `find prefix/KEYWORD`
+Command format (single search): `find prefix/KEYWORD`
 
-- Valid prefixes: `n`, `p`, `e`, `a`, `s`, `t`, `r`
-  - `n`: Search by name
+- Valid prefixes: `p`, `e`, `a`, `r`
   - `p`: Search by phone number
   - `e`: Search by email
   - `a`: Search by address
-  - `s`: Search by subject
-  - `t`: Search by tag
   - `r`: Search by relation
 
 Notes:
-* All searches are case-insensitive. e.g. `hans` will match `Hans`
+* All searches are case-insensitive. e.g. `Hans@EXAMPLE.COM` will match `hans@example.com`
 * Partial searching is supported. However, it is advised to be as specific as possible. While the app supports a command that looks like `find r/ce/bo` (matches relation `alice/bob/sister/brother` i.e. the end of Alice's name and the start of Bob's name), resulting in relations between `Alice` and `Bob` to appear, the freedom may seem unintuitive.
 * As relations are bidirectional, `find r/Bernice Yu/Alex Yeoh` is equivalent to `find r/Alex Yeoh/Bernice Yu`
-* Find by name, subject and tag supports multiple inputs. `find n/Sally David` will display anyone who has *either* `Sally` or `David` in their name, and similarly for subjects and tags.
-* Continuing from the above point, the other tags do not support multiple input, and instead will use whitespace as the explicit search string i.e. `find p/9876 5432` will find anyone that has a phone number containing `9876 5432`
+* These fields do not support multiple input, and instead will use whitespace as the explicit search string i.e. `find p/9876 5432` will find anyone that has a phone number containing `9876 5432`
 
 Examples:
-* `find n/John` will find everyone with `john` in their name
-* `find n/John Bill` will find everyone with `john` OR `bill` in their name 
-* `find t/online` will find everyone labelled with a tag that is or contains `online`
-* `find t/online offline` will find everyone labelled with a tag that is or contains `online` OR `offline`
 * `find r/mother` will find everyone who is a mother, or has a mother
 * `find r/brother/sister` will find all brothers who have sister(s), and sisters who have brother(s)
 * `find r/Alex Yeoh` will find everyone related to Alex Yeoh and himself. There will not be any results if he does not have any relation.
 * `find r/Alex Yeoh/Bernice Yu` will display both people to see the relations between them, only if they have relations with each other.
-* `find s/Math` will find everyone labelled with the subject that is or contains `Math`
-* `find s/Math Science` will find everyone labelled with the subject that is or contains `Math` OR `Science`
 * `find e/gmail` will find everyone whose email contains `gmail`
 * `find a/Blk` will find everyone whose address contains `Blk`
 * `find p/8` will find everyone whose phone number contains `8`
+
+### <span id="finding-persons-multiple"></span>Finding persons (multiple search): `find`
+
+Command format (multiple search): `find prefix/KEYWORD KEYWORDS`
+
+- Valid prefixes: `n`, `s`, `t`
+    - `n`: Search by name
+    - `s`: Search by subject
+    - `t`: Search by tag
+
+Notes:
+* All searches are case-insensitive. e.g. `hans` will match `Hans`
+* Find by name, subject and tag supports multiple inputs. `find n/Sally David` will display anyone who has *either* `Sally` or `David` in their name, and similarly for subjects and tags.
+
+Examples:
+* `find n/John` will find everyone with `john` in their name
+* `find n/John Bill` will find everyone with `john` OR `bill` in their name
+* `find s/Math` will find everyone labelled with the subject that is or contains `Math`
+* `find s/Math Science` will find everyone labelled with the subject that is or contains `Math` OR `Science`
+* `find t/online` will find everyone labelled with a tag that is or contains `online`
+* `find t/online offline` will find everyone labelled with a tag that is or contains `online` OR `offline`
 
 ### <span id="subject-command"></span>Renaming, deleting, or editing subject(s): `subject`
 
