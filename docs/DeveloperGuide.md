@@ -287,9 +287,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | see usage instructions                       | refer to instructions when I forget how to use the App                      |
 | `* * *`  | new user                                   | see an initial help message                  | see how to get started with the App                                         |
 | `* * *`  | user                                       | delete a contact                             | remove contacts that I no longer need                                       |
-| `* * *`  | user                                       | find a contact by name                       | locate details of contact without having to go through the entire list      |
-| `* * *`  | user                                       | find other relevant contacts given a contact | see others who are related to my contact if there is a need to contact them |
-| `* *`    | user                                       | add relation between two contacts            | keep track of how they are connected                                        |
+| `* * *`  | user                                       | find a contact by different fields           | locate details of contact without having to go through the entire list      |
+| `* * *`  | user                                       | add relation between two contacts            | keep track of how they are connected                                        |
+| `* *`    | user                                       | find other relevant contacts given a contact | see others who are related to my contact if there is a need to contact them |
 | `* *`    | user                                       | edit the subject field of a contact          | keep the contact's subject information up to date                           |
 | `* *`    | user                                       | rename a subject across the contacts         | correct or standardize subject names easily                                 |
 | `* *`    | user                                       | delete a subject across the contacts         | remove outdated or unnecessary subject records                              |
@@ -653,4 +653,18 @@ testers are expected to do more *exploratory* testing.
 
    1. If your changes to the data file makes its format invalid, TutorMap will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
    2. TutorMap does not erase all your data in case an invalid relation exists that still conforms to the relation format `name1/name2/relation1/relation2`. However, it may behave in unexpected ways.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Make `name` field more permissible.** The current `name` field only allows alphanumeric and whitespace characters, which might prevent the addition of real names like `O'Brien`. We plan to allow non-alphanumeric, as well as non-English characters.
+2. **Make `subject` field more permissible.** The current `subject` field only allows alphanumeric characters, which might prevent the addition of subjects like `H2 Math`. We plan to allow non-alphanumeric, as well as non-English characters.
+3. **Make `tag` field more permissible.** The current `tag` field only allows alphanumeric characters, which might prevent the addition of tags like `consult-based tutoring`. We plan to allow non-alphanumeric, as well as non-English characters.
+4. **Trim `name` fields with multiple whitespace between words.** The current `name` field accepts names with different internal whitespace as separate names, which usually does not appear in regular names and are mostly likely typos. We plan to trim multiple whitespace into 1 whitespace, and treat these contacts as the same person.  
+5. **Treat `name` fields with different capitalization as the same person.** The current `name` field treats names with different capitalization as separate names, which usually should be referring to the same person. We plan to treat these contacts as the same person.  
+6. **Create unique index identifier for contacts.** The current app uses the `name` field as a unique contact identifier, which prevents multiple contacts of the same name from being added. We plan to add a unique numerical identifier for each contact added, to allow for duplicate names.
+7. **Allow `relate` command to only be performed on people on the current display list.** The current implementation allows the relation of everyone in the app regardless of whether it is currently being filtered and displayed. We plan to only allow for relating contacts on the filtered list to align with other commands like `delete` that can only be performed on the filtered list.
 

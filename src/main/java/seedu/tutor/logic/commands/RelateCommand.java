@@ -42,12 +42,12 @@ public class RelateCommand extends Command {
             + "[" + PREFIX_RELATE_DELETE + "RELATION]...\n"
 
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_RELATE_ADD + "relate a\\Bernice Yu/Alex Yeoh/parent/child "
-            + "d\\David Li/Charlotte Oliveiro/brother1/brother2\n"
+            + PREFIX_RELATE_ADD + "Bernice Yu/Alex Yeoh/parent/child "
+            + PREFIX_RELATE_DELETE + "David Li/Charlotte Oliveiro/brother1/brother2\n"
 
             + "Notes: \n"
             + "⚠ " + PREFIX_RELATE_ADD + ", " + PREFIX_RELATE_DELETE + " uses backslash (\\), not forward slash (/).\n"
-            + "- RELATION format: [Person1/Person2/Relation-Name1/Relation-Name2]\n"
+            + "- RELATION format: [PERSON1/PERSON2/RELATION_NAME1/RELATION_NAME2]\n"
             + "- " + PREFIX_RELATE_ADD + ", " + PREFIX_RELATE_DELETE
             + "are optional, but at least one must be present.\n"
             + "- " + PREFIX_RELATE_ADD + ", " + PREFIX_RELATE_DELETE + " can be used once or multiple times.";

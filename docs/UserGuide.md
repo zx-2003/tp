@@ -88,7 +88,7 @@ Command format:
 * `help [COMMAND]`
 
 Notes:
-* The user can type in a command after 'help' to see how to use that command.
+* The user can type in a command after `help` to see how to use that command.
 
 Examples:
 * `help add` will show the user how to use the `add` command.
@@ -105,7 +105,11 @@ Command format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SUBJECT]... [t/T
 Notes:
 * A person can have any number of subjects (including 0).
 * A person can have any number of tags (including 0).
-* Person fields are case-sensitive (e.g. `John Doe` and `john doe` are different names, `Math` and `math` are different subjects).
+* Contacts are uniquely identified by name field.
+* All names must be alphanumeric (whitespaces allowed) only and non-empty.
+* Differing whitespace in between words in name field are different contacts (e.g. `John Doe` with one whitespace between `John` and `Doe` is a different contact from `John Doe` with two whitespaces between `John` and `Doe`).
+* Leading or trailing whitespaces in name field are ignored and are the same contact (e.g. ` John` with leading whitespace is the same as `John`).
+* Person fields are case-sensitive (e.g. `John Doe` and `John doe` are different names, `Math` and `math` are different subjects).
 * Phone numbers should contain only digits and be at least 3 digits long, optionally prefixed with a parenthesized country code. Examples: `(+65)12389123`, `12398123`, `(1809)12312093`, `(23-39)1289312`
 
 * Examples:
@@ -141,10 +145,6 @@ Examples:
 * `edit 3 s/` Clears existing subject for the 3rd person.
 * `edit 3 s/Math` Edits the subject of the 3rd person to be `Math`.
 * `edit 4 s/English s/Science` Edits the subjects of the 4th person to be `English` and `Science`.
-
-<box type="tip" seamless>
-
-</box>
 
 ### <span id="relating-persons"></span>Adding or deleting a relation : `relate`
 
@@ -268,7 +268,7 @@ Clears all entries from the tutor map. As a safety measure, `clear` returns the 
 
 Command format: `clear confirm`
 
-**Caution**: This action is irreversible! Use `clear confirm` to clear. Any additional whitespace will be ignored.
+**Caution**: This action is irreversible! Use `clear confirm` to clear. Any additional whitespace will be ignored, and the clearing will still proceed.
 
 ### <span id="exiting-program"></span>Exiting the program : `exit`
 
@@ -314,7 +314,7 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT]... [t/TAG]...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find n/NAME [MORE_NAMES]` e.g., `find n/James Jake` <br> `find r/RELATION` e.g., `find r/mother`, `find r/Alex Yeoh/Bernice Yu` <br> `find a/ADDRESS` e.g., `find a/Blk`, `find a/kent ridge` <br> `find e/EMAIL` e.g., `find e/john@fakemail.com`, `find e/gmail` <br> `find p/PHONE` e.g., `find p/999`, `find p/8` <br> `find s/SUBJECT [MORE_SUBJECTS]` e.g., `find s/math english` <br> `find t/TAG [MORE_TAGS]` e.g., `find t/paid online`
 **List**   | `list`
-**Help**   | `help`
+**Help**   | `help` <br> `help COMMAND` <br> eg. `help add`
 **Relate** | `relate [a\RELATION]... [d\RELATION]...`<br> e.g., `relate a\Bernice Yu/Alex Yeoh/parent/child d\David Li/Charlotte Oliveiro/brother1/brother2`
 **Subject** (rename)|`subject [r\SUBJECT1/SUBJECT2]`<br> e.g., `subject r\Math/Mathematics`
 **Subject** (delete)|`subject [d\SUBJECT1/SUBJECT2/SUBJECT3/...]`<br> e.g., `subject d\Art/History/Mandarin/English`
