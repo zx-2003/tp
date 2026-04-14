@@ -196,7 +196,7 @@ Notes:
 * Partial searching is supported. However, it is advised to be as specific as possible. While the app supports a command that looks like `find r/ce/bo` (matches relation `alice/bob/sister/brother` i.e. the end of Alice's name and the start of Bob's name), resulting in relations between `Alice` and `Bob` to appear, the freedom may seem unintuitive.
 * As relations are bidirectional, `find r/Bernice Yu/Alex Yeoh` is equivalent to `find r/Alex Yeoh/Bernice Yu`
 * Find by name, subject and tag supports multiple inputs. `find n/Sally David` will display anyone who has *either* `Sally` or `David` in their name, and similarly for subjects and tags.
-* Continuing from the above point, the other tags do not support multiple input, and instead will use whitespace as the explicit search string i.e. `find p/9876 5432` will find someone that has a phone number containing `9876 5432`
+* Continuing from the above point, the other tags do not support multiple input, and instead will use whitespace as the explicit search string i.e. `find p/9876 5432` will find anyone that has a phone number containing `9876 5432`
 
 Examples:
 * `find n/John` will find everyone with `john` in their name
