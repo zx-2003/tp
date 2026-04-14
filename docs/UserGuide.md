@@ -106,7 +106,7 @@ Notes:
 * A person can have any number of subjects (including 0).
 * A person can have any number of tags (including 0).
 * Person fields are case-sensitive (e.g. `John Doe` and `john doe` are different names, `Math` and `math` are different subjects).
-* Phone numbers should contain only digits and be at least 3 digits long, optionally prefixed with a parenthesized country code. Examples: `(+65)12389123`, `12398123`, `(1809)12312093`, `(23-39)1289312`
+* Phone numbers should contain 3 digits in the main body. Country code and area code may be included in the parentheses and must contain only numbers with an optional `+` after the opening bracket. You may use a single space or dash between digits for readability. Examples: `(+65) 9876 5432`, `(+1)(202) 555-0123`, `98765432`.
 
 * Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`

@@ -11,9 +11,11 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should contain only digits and be at least 3 digits long, "
-                    + "optionally prefixed with a parenthesized country code.\n"
-                    + "Example: (+65)12389123, 12398123, (1809)12312093, (23-39)1289312";
+            "Phone numbers should contain 3 digits in the main body. "
+                    + "Country code and area code may be included in the parentheses and "
+                    + "must contain only numbers with an optional `+` after the opening bracket. "
+                    + "You may use a single space or dash between digits for readability. "
+                    + "Examples: (+65) 9876 5432, (+1)(202) 555-0123, 98765432";
     public static final String VALIDATION_REGEX = "^(?=(?:\\D*\\d){3,})(\\(\\+?\\d+\\))?"
             + "(\\(\\d+\\))?[\\s-]?\\d([\\s-]?\\d){2,}$";
     public final String value;
